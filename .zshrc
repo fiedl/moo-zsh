@@ -19,11 +19,8 @@ zstyle ':completion:*:kill:*'   force-list always
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # New completion:
 # 1. All /etc/hosts hostnames are in autocomplete
-# 2. If you have a comment in /etc/hosts like #%foobar.domain,
-# then foobar.domain will show up in autocomplete!
-zstyle ':completion:*' hosts $(awk '/^[^#]/ {print $2 $3" "$4" "$5}' /etc/hosts | grep -v ip6- && grep "^#%" /etc/hosts | awk -F% '{print $2}')
-# http://www.sourceguru.net/ssh-host-completion-zsh-stylee/
-zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
+zstyle ':completion:*:hosts' hosts $hosts
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:*:users' ignored-patterns \
@@ -35,6 +32,7 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         proxy syslog www-data mldonkey sys snort
 
 setopt completealiases
+setopt autocd
 
 autoload -Uz compinit
 compinit
@@ -44,7 +42,7 @@ promptinit
 
 #prompt bart
 
-autoload -U colors && colors
+#autoload -U colors && colors
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
 typeset -A key
@@ -83,18 +81,70 @@ function zle-line-finish () {
 
 zle -N zle-line-init
 zle -N zle-line-finish
+
+watch=all
+LOGCHECK=60
 # End of lines added by compinstall
 # This will set the default prompt to the walters theme
 LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
 export LS_COLORS
 
-PROMPT=$'%(?..%{\e[41;38m%}%B-%?-%b%{\e[0m%} )%(1j.%{\e[01;33m%}[%j] .)%{\e[01;36m%}%n@%m%{\e[0m%} %{\e[01;32m%}%2~%{\e[0m%} %B%#%b '
+#PROMPT=$'%(?..%{\e[41;38m%}%B-%?-%b%{\e[0m%} )%(1j.%{\e[01;33m%}[%j] .)%{\e[01;36m%}%n@%m%{\e[0m%} %{\e[01;32m%}%2~%{\e[0m%}%B:%b '
 #RPROMPT=$'%{\e[01;31m%}[%!]%{\e[0m%} %B%@%b %U%D{%a}%u'
 # https://github.com/yonchu/zsh-vcs-prompt
-ZSH_VCS_PROMPT_USING_PYTHON='false'
-source ~/.zsh/git-prompt/zshrc.sh
-RPROMPT=$'$(git_super_status) %{\e[01;31m%}[%!]%{\e[0m%}%B%@%b'
+#ZSH_VCS_PROMPT_USING_PYTHON='false'
+#source ~/.zsh/git-prompt/zshrc.sh
+#RPROMPT=$'$(git_super_status) %{\e[01;31m%}[%!]%{\e[0m%}%B%@%b%(0?,,<%?>'
 
+prompt_char(){
+    [[ -n $vcs_info_msg_0_ ]] && echo '╘═😸 ' && return
+    echo '└─╼ '
+}
+
+vi-git-status () {
+  # Untracked files.
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    hook_com[unstaged]='%F{r}?%f'
+  fi
+}
+
+prompt_gtmanfred_precmd(){
+    vcs_info
+}
+
+prompt_gtmanfred_help(){
+  cat <<EOH
+gtmanfred's prompt
+EOH
+}
+
+prompt_gtmanfred_setup() {
+    setopt prompt_subst
+    autoload -U colors && colors
+    autoload -Uz add-zsh-hook vcs_info
+
+    prompt_opts=(cr percent subst)
+    add-zsh-hook precmd prompt_gtmanfred_precmd
+
+    zstyle ':vcs_info:*' enable bzr git hg svn
+    zstyle ':vcs_info:*' check-for-changes true
+    zstyle ':vcs_info:*' stagedstr '%F{g}●%f'
+    zstyle ':vcs_info:*' unstagedstr '%F{y}!%f'
+    zstyle ':vcs_info:*' formats 'on %F{m}%b%c%u%F{n}'
+    zstyle ':vcs_info:*' actionformats "%b%c%u|%F{c}%a%f"
+    zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b|%F{c}%r%f'
+    zstyle ':vcs_info:git*+set-message:*' hooks git-status
+
+    PROMPT='┌─ %B%F{green}%n%f%b at %F{yellow}%m%f in %B%F{green}%~%f%b ${vcs_info_msg_0_}%{$reset_color%}$prompt_newline$(prompt_char)%f'
+
+    RPROMPT="%(?,%F{green}(⌐■_■),%F{yellow}%? %F{red}（╯°□°）╯︵ ┻━┻)%f"
+    PS4='+%N:%i:%x:%I>'
+}
+
+prompt_gtmanfred_preview(){
+    prompt_preview_theme gtmanfred "$@"
+}
+prompt_gtmanfred_setup "$@"
 #------------------------------
 # Window title
 #------------------------------
@@ -114,9 +164,34 @@ case $TERM in
 		}
 	;; 
 esac
+
+# hub tab-completion script for zsh.
+# This script complements the completion script that ships with git.
+#
+# vim: ft=zsh sw=2 ts=2 et
+
+# Autoload _git completion functions
+if declare -f _git > /dev/null; then
+  _git
+fi
+
+if declare -f _git_commands > /dev/null; then
+  _hub_commands=(
+    'alias:show shell instructions for wrapping git'
+    'pull-request:open a pull request on GitHub'
+    'fork:fork origin repo on GitHub'
+    'create:create new repo on GitHub for the current project'
+    'browse:browse the project on GitHub'
+    'compare:open GitHub compare view'
+  )
+  # Extend the '_git_commands' function with hub commands
+  eval "$(declare -f _git_commands | sed -e 's/base_commands=(/base_commands=(${_hub_commands} /')"
+fi
+
+screenfetch
 # black, red, green, yellow, blue, magenta, cyan, white
-[ ! "$UID" = "0" ] && archey3 -c cyan
-[  "$UID" = "0" ] && archey3 -c red
+#[ ! "$UID" = "0" ] && archey3 -c cyan
+#[  "$UID" = "0" ] && archey3 -c red
 #command cowsay $(fortune)
 #PS1="\[\e[01;31m\]┌─[\[\e[01;35m\u\e[01;31m\]]──[\[\e[00;37m\]${HOSTNAME%%.*}\[\e[01;32m\]]:\w$\[\e[01;31m\]\n\[\e[01;31m\]└──\[\e[01;36m\]>>\[\e[0m\]"
 #PS1="\n${DGRAY}╭─[${LBLUE}\w${DGRAY}]\n${DGRAY}╰─[${WHITE}\T${DGRAY}]${DGRAY}>${BLUE}>${LBLUE}> ${RESET_COLOR}"
@@ -137,6 +212,7 @@ function ii()   # Get current host related info.
     echo
 }
 alias c='clear'
+alias f='file'
 alias ls='ls --color=auto'
 alias ping='ping -c 5'
 alias pong='tsocks ping -c 5'
@@ -199,13 +275,30 @@ alias sss="pacman-color -Ss"           # '[s]earch'         - search for a packa
 alias syu="sudo pacman-color -Syu"     # '[u]pdate'         - upgrade all packages to their newest version
 alias pacremove="sudo pacman-color -R"       # '[r]emove'         - uninstall one or more packages
 alias rs="sudo pacman-color -Rs"     # '[r]emove'         - uninstall one or more packages and its dependencies 
-#packer
+# packer
 alias a="packer-color"
 alias sa="packer-color -S"
 alias syua="packer-color -Syu --auronly"
+# git hub
+alias git=hub
 # suffix aliases
 alias -s php=subl
 alias -s html=luakit
+alias -s png=gpicview
+alias -s jpg=gpicview
+alias -s gif=gpicview
+alias -s GIF=gpicview
+alias -s JPG=gpicview
+alias -s PNG=gpicview
+alias -s gz='tar -xzvf'
+alias -s bz2='tar -xjvf'
+alias -s java=$EDITOR
+alias -s txt=$EDITOR
+alias -s PKGBUILD=$EDITOR
+hash -d github=$HOME/github
+hash -d movies=/media/truecrypt2/movies
+hash -d tvshows=/media/truecrypt1/tv
+hash -d units=/usr/lib/systemd/system/
 # global aliases
 alias -g ...='../..'
 alias -g C='| wc -l'
