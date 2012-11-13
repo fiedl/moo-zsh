@@ -3,6 +3,7 @@ HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=3000
 bindkey -e
+
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/pdq/.zshrc'
