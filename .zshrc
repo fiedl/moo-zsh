@@ -234,7 +234,7 @@ alias home='cd ~'
 alias conf='cd ~/.config'
 alias dev='cd ~/Development'
 alias down='cd ~/Downloads'
-alias backup=' zsh ~/github/pdq/backup.sh'
+alias backup=' sh ~/github/pdq/backup.sh'
 alias nc='ncmpcpp'
 alias grep='grep --color=auto'
 alias mounthdd='sudo udisks --mount /dev/sdb4'
@@ -266,8 +266,8 @@ alias mirror='sudo reflector -c "Canada United States" -f 6 > mirrorlist'
 # modified commands
 alias psg='ps aux | grep'  #requires an argument
 # chmod commands
-#alias mx='chmod a+x'
-#alias 000='chmod 000'
+#alias mx='chmod a+x' 
+#alias 000='chmod 000' 😸
 #alias 644='chmod 644'
 #alias 755='chmod 755'
 # pacman
@@ -280,6 +280,8 @@ alias rs="sudo pacman-color -Rs"     # '[r]emove'         - uninstall one or mor
 alias a="packer-color"
 alias sa="packer-color -S"
 alias syua="packer-color -Syu --auronly"
+# cower
+alias cow="cower -u -v"
 # git hub
 alias git=hub
 # suffix aliases
