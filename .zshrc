@@ -271,15 +271,19 @@ alias psg='ps aux | grep'  #requires an argument
 #alias 644='chmod 644'
 #alias 755='chmod 755'
 # pacman
-alias s="sudo pacman-color -S"      # default action     - install one or more packages
-alias sss="pacman-color -Ss"           # '[s]earch'         - search for a package using one or more keywords
+alias p="sudo pacman-color -S"      # default action     - install one or more packages
+alias pp="pacman-color -Ss"           # '[s]earch'         - search for a package using one or more keywords
 alias syu="sudo pacman-color -Syu"     # '[u]pdate'         - upgrade all packages to their newest version
 alias pacremove="sudo pacman-color -R"       # '[r]emove'         - uninstall one or more packages
 alias rs="sudo pacman-color -Rs"     # '[r]emove'         - uninstall one or more packages and its dependencies 
 # packer
-alias a="packer-color"
-alias sa="packer-color -S"
-alias syua="packer-color -Syu --auronly"
+# alias a="packer-color"
+# alias sa="packer-color -S"
+# alias syua="packer-color -Syu --auronly"
+alias a="pacaur -s"    # search packages
+alias aa="pacaur -S"   # install package
+alias syua="pacaur -Syua" #update aur packages
+alias syud="pacaur -Syua --devel" #update devel packages
 # cower
 alias cow="cower -u -v"
 # git hub
