@@ -270,7 +270,7 @@ alias psg='ps aux | grep'  #requires an argument
 #alias 000='chmod 000' 😸
 #alias 644='chmod 644'
 #alias 755='chmod 755'
-# pacman
+# pacmanalias a="pacaur -s"
 alias p="sudo pacman-color -S"      # default action     - install one or more packages
 alias pp="pacman-color -Ss"           # '[s]earch'         - search for a package using one or more keywords
 alias syu="sudo pacman-color -Syu"     # '[u]pdate'         - upgrade all packages to their newest version
@@ -326,3 +326,4 @@ alias -g T='tail -f'
 # remote server
 source ~/.bash_ssh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/doc/pkgfile/command-not-found.zsh
