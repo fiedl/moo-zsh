@@ -189,6 +189,8 @@ if declare -f _git_commands > /dev/null; then
   eval "$(declare -f _git_commands | sed -e 's/base_commands=(/base_commands=(${_hub_commands} /')"
 fi
 
+set -o notify 
+
 screenfetch
 # black, red, green, yellow, blue, magenta, cyan, white
 #[ ! "$UID" = "0" ] && archey3 -c cyan
@@ -253,6 +255,9 @@ alias xdef='xrdb -merge ~/.Xdefaults'
 alias flushdns="sudo /etc/rc.d/nscd restart"
 alias delfonts='fc-cache -vf'
 alias cclean='sudo cacheclean -v 1'
+alias sd='systemctl'
+alias md5='md5sum'
+alias pdq='~/bin/pdqutil'
 #alias startx='startx &> ~/.xlog'
 #alias irssi='urxvt -e irssi &'
 #alias finch='urxvt -e finch &'
@@ -280,8 +285,8 @@ alias rs="sudo pacman-color -Rs"     # '[r]emove'         - uninstall one or mor
 # alias a="packer-color"
 # alias sa="packer-color -S"
 # alias syua="packer-color -Syu --auronly"
-alias a="pacaur -s"    # search packages
-alias aa="pacaur -S"   # install package
+alias a="pacaur -S"    # search packages
+alias aa="pacaur -s"   # install package
 alias syua="pacaur -Syua" #update aur packages
 alias syud="pacaur -Syua --devel" #update devel packages
 # cower
