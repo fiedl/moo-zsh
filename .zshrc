@@ -328,7 +328,5 @@ alias -g NUL="> /dev/null 2>&1"
 alias -g PIPE='|'
 alias -g S='| sort'
 alias -g T='tail -f'
-# remote server
-source ~/.bash_ssh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/doc/pkgfile/command-not-found.zsh
