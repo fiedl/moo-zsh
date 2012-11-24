@@ -293,6 +293,8 @@ alias syud="pacaur -Syua --devel" #update devel packages
 alias cow="cower -u -v"
 # git hub
 alias git=hub
+alias commit="git commit -m"
+alias push="git push origin master"
 # suffix aliases
 alias -s php=subl
 alias -s html=luakit
