@@ -11,7 +11,6 @@ if [ ! -f $XDG_CACHE_HOME ];
 then
     mkdir -p -m 0700 $XDG_CACHE_HOME
 fi
-
+eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 [[ -f ~/.zshrc ]] && . ~/.zshrc
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
-eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
