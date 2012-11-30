@@ -64,8 +64,7 @@ echo "KNOCK KNOCK"
 echo "KNOCK KNOCK"
 echo "KNOCK KNOCK"
 echo ""
-sleep 1s
 cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
-sleep 3s
+sleep 2s
 [[ -f ~/.zshrc ]] && . ~/.zshrc
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
