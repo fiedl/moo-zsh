@@ -285,6 +285,9 @@ alias rs="sudo pacman-color -Rs"     # '[r]emove'         - uninstall one or mor
 # alias a="packer-color"
 # alias sa="packer-color -S"
 # alias syua="packer-color -Syu --auronly"
+# powerpill
+alias pillu="sudo powerpill -Syu"
+alias pill="sudo powerpill -S"
 alias a="pacaur -S"    # search packages
 alias aa="pacaur -s"   # install package
 alias syua="pacaur -Syua" #update aur packages
