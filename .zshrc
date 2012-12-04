@@ -1,7 +1,19 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE=~/.histfile_`hostname`
 HISTSIZE=5000
 SAVEHIST=3000
+HISTFILESIZE=${HISTSIZE}                    # bash will remember N commands
+HISTCONTROL=ignoreboth                      # ingore duplicates and spaces (ignoreboth, ignoredups, ignorespace)
+# don't append the following to history: consecutive duplicate
+# commands, ls, bg and fg, and exit
+HISTIGNORE='\&:fg:bg:ls:pwd:cd ..:cd ~-:cd -:cd:jobs:set -x:ls -l:ls -l'
+HISTIGNORE=${HISTIGNORE}':%1:%2:shutdown*'
+export HISTIGNORE
+
+# if exists, add ~/bin to PATH
+if [ -d ~/bin ] ; then
+   PATH=~/bin:$PATH
+fi
+
 bindkey -e
 
 # End of lines configured by zsh-newuser-install
@@ -136,9 +148,9 @@ prompt_gtmanfred_setup() {
     zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b|%F{c}%r%f'
     zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
-    PROMPT='┌─ %B%F{green}%n%f%b at %F{red}%m%f in %B%F{green}%~%f%b ${vcs_info_msg_0_}%{$reset_color%}$prompt_newline$(prompt_char)%f'
+    PROMPT='┌─ %B%F{blue}%n%f%b %F{green}at%f %B%F{blue}%m%f%b %F{green}in%f %B%F{blue}%~%f%b ${vcs_info_msg_0_}%{$reset_color%}$prompt_newline$(prompt_char)%f'
 
-    RPROMPT="%(?,%F{green}(⌐■_■),%F{yellow}%? %F{red}（╯°□°）╯︵ ┻━┻)%f"
+    RPROMPT="%(?,%F{blue}(⌐■_■),%F{yellow}%? %F{red}（╯°□°）╯︵ ┻━┻)%f"
     PS4='+%N:%i:%x:%I>'
 }
 
@@ -191,7 +203,7 @@ fi
 
 set -o notify 
 
-screenfetch
+screenfetch -D "Arch Linux - Old"
 # black, red, green, yellow, blue, magenta, cyan, white
 #[ ! "$UID" = "0" ] && archey3 -c cyan
 #[  "$UID" = "0" ] && archey3 -c red
