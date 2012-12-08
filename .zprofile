@@ -83,13 +83,6 @@ else
 	fi
 fi
 echo "KNOCK KNOCK"
-echo "KNOCK KNOCK"
-echo "KNOCK KNOCK"
-echo "KNOCK KNOCK"
-echo "KNOCK KNOCK"
-echo "KNOCK KNOCK"
-echo "KNOCK KNOCK"
-echo "KNOCK KNOCK"
 echo ""
 cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
 sleep 2s

@@ -203,7 +203,7 @@ fi
 
 set -o notify 
 
-screenfetch -D "Arch Linux - Old"
+screenfetch -D "Arch Linux - pdq"
 # black, red, green, yellow, blue, magenta, cyan, white
 #[ ! "$UID" = "0" ] && archey3 -c cyan
 #[  "$UID" = "0" ] && archey3 -c red
@@ -225,6 +225,12 @@ function ii()   # Get current host related info.
     echo -e "\n${RED}ISP Address :$NC" ; echo ${MY_ISP:-"Not connected"}
     echo -e "\n${RED}Open connections :$NC "; netstat -pan --inet;
     echo
+}
+# usage: remind <time> <text>
+# e.g.: remind 10m "omg, the pizza"
+function remind()
+{
+    sleep $1 && notify-send "$2" &
 }
 alias c='clear'
 alias f='file'
