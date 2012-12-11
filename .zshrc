@@ -15,6 +15,8 @@ if [ -d ~/bin ] ; then
    PATH=~/bin:$PATH
 fi
 
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
 bindkey -e
 
 # End of lines configured by zsh-newuser-install
