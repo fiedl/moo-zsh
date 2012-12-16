@@ -21,7 +21,7 @@ bindkey -e
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/pdq/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion:*:pacman:*' force-list always
 zstyle ':completion:*:*:pacman:*' menu yes select
@@ -33,10 +33,11 @@ zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*'   force-list always
 # match uppercase from lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-# New completion:
 # 1. All /etc/hosts hostnames are in autocomplete
-hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
-zstyle ':completion:*:hosts' hosts $hosts
+if [ -f $HOME/.ssh/known_hosts ] ; then
+    hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
+    zstyle ':completion:*:hosts' hosts $hosts
+fi
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:*:users' ignored-patterns \
@@ -55,8 +56,6 @@ compinit
 
 autoload -U promptinit
 promptinit
-
-#prompt bart
 
 #autoload -U colors && colors
 # create a zkbd compatible hash;
@@ -104,13 +103,6 @@ LOGCHECK=60
 # This will set the default prompt to the walters theme
 LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
 export LS_COLORS
-
-#PROMPT=$'%(?..%{\e[41;38m%}%B-%?-%b%{\e[0m%} )%(1j.%{\e[01;33m%}[%j] .)%{\e[01;36m%}%n@%m%{\e[0m%} %{\e[01;32m%}%2~%{\e[0m%}%B:%b '
-#RPROMPT=$'%{\e[01;31m%}[%!]%{\e[0m%} %B%@%b %U%D{%a}%u'
-# https://github.com/yonchu/zsh-vcs-prompt
-#ZSH_VCS_PROMPT_USING_PYTHON='false'
-#source ~/.zsh/git-prompt/zshrc.sh
-#RPROMPT=$'$(git_super_status) %{\e[01;31m%}[%!]%{\e[0m%}%B%@%b%(0?,,<%?>'
 
 prompt_char(){
     [[ -n $vcs_info_msg_0_ ]] && echo '╘═😸 ' && return
@@ -161,9 +153,8 @@ prompt_gtmanfred_preview(){
     prompt_preview_theme gtmanfred "$@"
 }
 prompt_gtmanfred_setup "$@"
-#------------------------------
+
 # Window title
-#------------------------------
 case $TERM in
     termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
 		precmd () { print -Pn "\e]0;[%n@%M][%~]%#\a" } 
@@ -183,8 +174,6 @@ esac
 
 # hub tab-completion script for zsh.
 # This script complements the completion script that ships with git.
-#
-# vim: ft=zsh sw=2 ts=2 et
 
 # Autoload _git completion functions
 if declare -f _git > /dev/null; then
@@ -207,14 +196,7 @@ fi
 set -o notify 
 
 screenfetch -D "Arch Linux - pdq"
-# black, red, green, yellow, blue, magenta, cyan, white
-#[ ! "$UID" = "0" ] && archey3 -c cyan
-#[  "$UID" = "0" ] && archey3 -c red
-#command cowsay $(fortune)
-#PS1="\[\e[01;31m\]┌─[\[\e[01;35m\u\e[01;31m\]]──[\[\e[00;37m\]${HOSTNAME%%.*}\[\e[01;32m\]]:\w$\[\e[01;31m\]\n\[\e[01;31m\]└──\[\e[01;36m\]>>\[\e[0m\]"
-#PS1="\n${DGRAY}╭─[${LBLUE}\w${DGRAY}]\n${DGRAY}╰─[${WHITE}\T${DGRAY}]${DGRAY}>${BLUE}>${LBLUE}> ${RESET_COLOR}"
-#complete -cf sudo
-#complete -cf man
+
 function ii()   # Get current host related info.
 {
     echo -e "\nYou are logged on ${RED}$HOST"
@@ -297,11 +279,11 @@ alias psg='ps aux | grep'  #requires an argument
 #alias 644='chmod 644'
 #alias 755='chmod 755'
 # pacman
-alias p="sudo pacman-color -S"      # default action     - install one or more packages
-alias pp="pacman-color -Ss"           # '[s]earch'         - search for a package using one or more keywords
-alias syu="sudo pacman-color -Syu"     # '[u]pdate'         - upgrade all packages to their newest version
-alias pacremove="sudo pacman-color -R"       # '[r]emove'         - uninstall one or more packages
-alias rs="sudo pacman-color -Rs"     # '[r]emove'         - uninstall one or more packages and its dependencies 
+alias p="sudo pacman-color -S"         # install one or more packages
+alias pp="pacman-color -Ss"            # search for a package using one or more keywords
+alias syu="sudo pacman-color -Syu"     # upgrade all packages to their newest version
+alias pacremove="sudo pacman-color -R" # uninstall one or more packages
+alias rs="sudo pacman-color -Rs"       # uninstall one or more packages and its dependencies 
 # packer
 # alias a="packer-color"
 # alias sa="packer-color -S"
@@ -309,10 +291,10 @@ alias rs="sudo pacman-color -Rs"     # '[r]emove'         - uninstall one or mor
 # powerpill
 alias pillu="sudo powerpill -Syu"
 alias pill="sudo powerpill -S"
-alias a="pacaur -S"    # search packages
-alias aa="pacaur -s"   # install package
-alias syua="pacaur -Syua" #update aur packages
-alias syud="pacaur -Syua --devel" #update devel packages
+alias a="pacaur -S"               # search packages
+alias aa="pacaur -s"              # install package
+alias syua="pacaur -Syua"         # update aur packages
+alias syud="pacaur -Syua --devel" # update devel packages
 # cower
 alias cow="cower -u -v"
 # git hub
