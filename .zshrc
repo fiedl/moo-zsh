@@ -301,6 +301,9 @@ alias cow="cower -u -v"
 alias git=hub
 alias commit="git commit -m"
 alias push="git push origin master"
+# systemd services
+alias trstart='sudo systemctl start transmission'
+alias trstop='sudo systemctl stop transmission'
 # suffix aliases
 alias -s php=subl
 alias -s html=luakit
