@@ -304,6 +304,7 @@ alias push="git push origin master"
 # systemd services
 alias trstart='sudo systemctl start transmission'
 alias trstop='sudo systemctl stop transmission'
+alias scripts='sh ~/.config/awesome/global_script.sh'
 # suffix aliases
 alias -s php=subl
 alias -s html=luakit
