@@ -305,6 +305,7 @@ alias push="git push origin master"
 alias trstart='sudo systemctl start transmission'
 alias trstop='sudo systemctl stop transmission'
 alias scripts='sh ~/.config/awesome/global_script.sh'
+alias steam='export SDL_AUDIODRIVER=alsa && steam'
 # suffix aliases
 alias -s php=subl
 alias -s html=luakit
