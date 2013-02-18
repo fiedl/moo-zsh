@@ -1,6 +1,6 @@
 HISTFILE=~/.histfile_`hostname`
-HISTSIZE=5000
-SAVEHIST=3000
+HISTSIZE=10000
+SAVEHIST=10000
 HISTFILESIZE=${HISTSIZE}                    # bash will remember N commands
 HISTCONTROL=ignoreboth                      # ingore duplicates and spaces (ignoreboth, ignoredups, ignorespace)
 # don't append the following to history: consecutive duplicate
@@ -197,26 +197,12 @@ set -o notify
 
 screenfetch -D "Arch Linux - pdq"
 
-function ii()   # Get current host related info.
-{
-    echo -e "\nYou are logged on ${RED}$HOST"
-    echo -e "\nAdditionnal information:$NC " ; uname -a
-    echo -e "\n${RED}Users logged on:$NC " ; w -h
-    echo -e "\n${RED}Current date :$NC " ; date
-    echo -e "\n${RED}Machine stats :$NC " ; uptime
-    echo -e "\n${RED}Memory stats :$NC " ; free
-    my_ip 2>&- ;
-    echo -e "\n${RED}Local IP Address :$NC" ; echo ${MY_IP:-"Not connected"}
-    echo -e "\n${RED}ISP Address :$NC" ; echo ${MY_ISP:-"Not connected"}
-    echo -e "\n${RED}Open connections :$NC "; netstat -pan --inet;
-    echo
-}
 # usage: remind <time> <text>
 # e.g.: remind 10m "omg, the pizza"
-function remind()
-{
+function remind() {
     sleep $1 && notify-send "$2" &
 }
+
 alias c='clear'
 alias f='file'
 alias ls='ls --color=auto'
@@ -244,7 +230,7 @@ alias nc='ncmpcpp'
 alias grep='grep --color=auto'
 alias mounthdd='sudo udisks --mount /dev/sdb4'
 alias mounthdd3='sudo udisks --mount /dev/sdb3'
-#alias sploit='/opt/metasploit-4.2.0/msfconsole'
+alias sploit='/opt/metasploit-4.2.0/msfconsole'
 alias kdeicons='rm ~/.kde4/cache-linux/icon-cache.kcache'
 alias deltrash1='sudo rm -rv /media/truecrypt1/.Trash-1000/'
 alias deltrash2='sudo rm -rv /media/truecrypt2/.Trash-1000/'
@@ -252,20 +238,14 @@ alias deltrash='rm -rv ~/.local/share/Trash/'
 alias sdeltrash1='sudo srm -rv /media/truecrypt1/.Trash-1000/'
 alias sdeltrash2='sudo srm -rv /media/truecrypt2/.Trash-1000/'
 alias sdeltrash='srm -rv ~/.local/share/Trash/'
-alias delthumbs='srm -rv ~/.thumbnails/'
+alias delthumbs='rm -rv ~/.thumbnails/ && rm ~/.kde4/cache-linux/icon-cache.kcache'
 alias reload='source ~/.zshrc'
 alias xdef='xrdb -merge ~/.Xdefaults' 
-alias flushdns="sudo /etc/rc.d/nscd restart"
 alias delfonts='fc-cache -vf'
 alias cclean='sudo cacheclean -v 1'
 alias sd='systemctl'
 alias md5='md5sum'
-#alias pdq='~/bin/pdqutil'
-#alias startx='startx &> ~/.xlog'
-#alias irssi='urxvt -e irssi &'
-#alias finch='urxvt -e finch &'
 alias mirror='sudo reflector -c "Canada United States" -f 6 > mirrorlist'
-#alias tor='~/.tor-browser_en-US/start-tor-browser'
 # control hardware
 #alias cdo='eject /dev/cdrecorder'
 #alias cdc='eject -t /dev/cdrecorder'
@@ -275,7 +255,7 @@ alias mirror='sudo reflector -c "Canada United States" -f 6 > mirrorlist'
 alias psg='ps aux | grep'  #requires an argument
 # chmod commands
 #alias mx='chmod a+x' 
-#alias 000='chmod 000' 😸
+#alias 000='chmod 000'
 #alias 644='chmod 644'
 #alias 755='chmod 755'
 # pacman
@@ -304,8 +284,10 @@ alias push="git push origin master"
 # systemd services
 alias trstart='sudo systemctl start transmission'
 alias trstop='sudo systemctl stop transmission'
+alias lampstart='sudo lamp start'
+alias lampstop='sudo lamp stop'
 alias scripts='sh ~/.config/awesome/global_script.sh'
-alias steam='export SDL_AUDIODRIVER=alsa && steam'
+alias steam='export STEAM_RUNTIME=0 && export SDL_AUDIODRIVER=alsa && steam'
 # suffix aliases
 alias -s php=subl
 alias -s html=luakit

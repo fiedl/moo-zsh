@@ -12,7 +12,7 @@ then
     mkdir -p -m 0700 $XDG_CACHE_HOME
 fi
 
-# welcome message
+# welcome audio message
 ogg123 -q "${HOME}/.config/awesome/sounds/voice-welcome.ogg"
 cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
 ogg123 -q "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
@@ -23,7 +23,7 @@ if [ -f "${HOME}/.ssh/id_rsa" ] ; then
 	ogg123 -q "${HOME}/.config/awesome/sounds/voice-piy.ogg"
 fi
 
-# truecrypt mounted success file
+# mounted success files
 tc1="/media/truecrypt1/test"
 tc2="/media/truecrypt2/test"
 tc3="/media/truecrypt1/EncryptedDropbox/test"
@@ -90,6 +90,6 @@ fi
 echo "KNOCK KNOCK"
 echo ""
 cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
-sleep 1s
+#sleep 1s
 [[ -f ~/.zshrc ]] && . ~/.zshrc
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
