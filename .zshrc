@@ -9,6 +9,8 @@ HISTIGNORE='\&:fg:bg:ls:pwd:cd ..:cd ~-:cd -:cd:jobs:set -x:ls -l:ls -l'
 HISTIGNORE=${HISTIGNORE}':%1:%2:shutdown*'
 export HISTIGNORE
 export PATH="/usr/lib/cw:$PATH"
+export NMON=rkj
+
 
 # if exists, add ~/bin to PATH
 if [ -d ~/bin ] ; then
