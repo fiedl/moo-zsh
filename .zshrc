@@ -15,6 +15,10 @@ if [ -d ~/bin ] ; then
    PATH=~/bin:$PATH
 fi
 
+## clipbored options for dmenurl/dmenuclip
+export CLIPBORED_DMENU_FONT=terminus
+export CLIPBORED_DMENU_NORMAL_FG=#4FFF64
+
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 bindkey -e
