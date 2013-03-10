@@ -92,4 +92,4 @@ echo ""
 cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
 #sleep 1s
 [[ -f ~/.zshrc ]] && . ~/.zshrc
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
+#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
