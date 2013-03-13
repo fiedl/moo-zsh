@@ -252,6 +252,7 @@ alias cclean='sudo cacheclean -v 1'
 alias sd='systemctl'
 alias md5='md5sum'
 alias mirror='sudo reflector -c "Canada United States" -f 6 > mirrorlist'
+alias killdoll="sudo killall -q kactivitymanagerd; sudo killall -q kdeinit4; sudo killall -q kded4; sudo killall -q knotify4; sudo killall -q kuiserver; sudo killall -q kglobalaccel; sudo killall -q klauncher; sudo killall -q dolphin; echo 'all kde stuffs killed...'"
 # control hardware
 #alias cdo='eject /dev/cdrecorder'
 #alias cdc='eject -t /dev/cdrecorder'
