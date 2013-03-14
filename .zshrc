@@ -10,7 +10,8 @@ HISTIGNORE=${HISTIGNORE}':%1:%2:shutdown*'
 export HISTIGNORE
 export PATH="/usr/lib/cw:$PATH"
 export NMON=rkj
-
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local}
 
 # if exists, add ~/bin to PATH
 if [ -d ~/bin ] ; then
@@ -18,7 +19,7 @@ if [ -d ~/bin ] ; then
 fi
 
 ## clipbored options for dmenurl/dmenuclip
-export CLIPBORED_DMENU_FONT=terminus
+#export CLIPBORED_DMENU_FONT=terminus
 export CLIPBORED_DMENU_NORMAL_FG=#4FFF64
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
