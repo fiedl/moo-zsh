@@ -18,6 +18,9 @@ if [ -d ~/bin ] ; then
    PATH=~/bin:$PATH
 fi
 
+if [ -d ~/.gem/ruby/1.9.1/bin ] ; then
+   PATH=~/.gem/ruby/1.9.1/bin:$PATH
+fi
 ## clipbored options for dmenurl/dmenuclip
 #export CLIPBORED_DMENU_FONT=terminus
 export CLIPBORED_DMENU_NORMAL_FG=#4FFF64
