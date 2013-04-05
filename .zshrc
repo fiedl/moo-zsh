@@ -12,6 +12,7 @@ export PATH="/usr/lib/cw:$PATH"
 export NMON=rkj
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local}
+export MOZ_DISABLE_PANGO=1
 
 # if exists, add ~/bin to PATH
 if [ -d ~/bin ] ; then
@@ -270,15 +271,16 @@ alias psg='ps aux | grep'  #requires an argument
 #alias 644='chmod 644'
 #alias 755='chmod 755'
 # pacman
-alias p="sudo pacman-color -S"         # install one or more packages
-alias pp="pacman-color -Ss"            # search for a package using one or more keywords
-alias syu="sudo pacman-color -Syu"     # upgrade all packages to their newest version
-alias pacremove="sudo pacman-color -R" # uninstall one or more packages
-alias rs="sudo pacman-color -Rs"       # uninstall one or more packages and its dependencies 
+alias p="sudo pacman -S"         # install one or more packages
+alias pp="pacman -Ss"            # search for a package using one or more keywords
+alias qs="pacman -Qs"            # search for installed package using one or more keywords
+alias syu="sudo pacman -Syu"     # upgrade all packages to their newest version
+alias pacremove="sudo pacman -R" # uninstall one or more packages
+alias rs="sudo pacman -Rs"       # uninstall one or more packages and its dependencies 
 # packer
-# alias a="packer-color"
-# alias sa="packer-color -S"
-# alias syua="packer-color -Syu --auronly"
+# alias a="packer"
+# alias sa="packer -S"
+# alias syua="packer -Syu --auronly"
 # powerpill
 alias pillu="sudo powerpill -Syu"
 alias pill="sudo powerpill -S"
