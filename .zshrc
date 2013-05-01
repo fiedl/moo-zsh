@@ -288,6 +288,7 @@ alias a="pacaur -S"               # search packages
 alias aa="pacaur -s"              # install package
 alias syua="pacaur -Syua"         # update aur packages
 alias syud="pacaur -Syua --devel" # update devel packages
+alias up="sudo pacman -Syu && pacaur -Syua"
 # cower
 alias cow="cower -u -v"
 # git hub
