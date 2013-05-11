@@ -206,7 +206,7 @@ fi
 
 set -o notify 
 
-screenfetch -D "Arch Linux - pdq"
+screenfetch -D "Arch Linux"
 
 # usage: remind <time> <text>
 # e.g.: remind 10m "omg, the pizza"
@@ -265,6 +265,7 @@ alias killdoll="sudo killall -q kactivitymanagerd; sudo killall -q kdeinit4; sud
 #alias dvdc='eject -t /dev/dvd'
 # modified commands
 alias psg='ps aux | grep'  #requires an argument
+alias cpufreq='watch grep \"cpu MHz\" /proc/cpuinfo'
 # chmod commands
 #alias mx='chmod a+x' 
 #alias 000='chmod 000'
