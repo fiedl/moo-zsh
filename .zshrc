@@ -266,6 +266,7 @@ alias killdoll="sudo killall -q kactivitymanagerd; sudo killall -q kdeinit4; sud
 # modified commands
 alias psg='ps aux | grep'  #requires an argument
 alias cpufreq='watch grep \"cpu MHz\" /proc/cpuinfo'
+alias nets='ls /sys/class/net'
 # chmod commands
 #alias mx='chmod a+x' 
 #alias 000='chmod 000'
