@@ -303,7 +303,7 @@ alias trstop='sudo systemctl stop transmission'
 alias lampstart='sudo lamp start'
 alias lampstop='sudo lamp stop'
 alias scripts='sh ~/.config/awesome/global_script.sh'
-alias steam='export STEAM_RUNTIME=0 && export SDL_AUDIODRIVER=alsa && steam'
+#alias steam='export STEAM_RUNTIME=0 && export SDL_AUDIODRIVER=alsa && steam'
 # suffix aliases
 alias -s php=subl
 alias -s html=luakit
