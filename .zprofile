@@ -14,14 +14,14 @@ then
 fi
 
 # welcome audio message
-ogg123 -q "${HOME}/.config/awesome/sounds/voice-welcome.ogg"
+#ogg123 -q "${HOME}/.config/awesome/sounds/voice-welcome.ogg"
 cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
-ogg123 -q "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
+#ogg123 -q "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
 
 # ssh-agent
 if [ -f "${HOME}/.ssh/id_rsa" ] ; then
 	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-	ogg123 -q "${HOME}/.config/awesome/sounds/voice-piy.ogg"
+	#ogg123 -q "${HOME}/.config/awesome/sounds/voice-piy.ogg"
 fi
 
 # # mounted success files
