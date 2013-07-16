@@ -49,10 +49,11 @@ if [ -f $HOME/.ssh/known_hosts ] ; then
     hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
     zstyle ':completion:*:hosts' hosts $hosts
 fi
+
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:*:users' ignored-patterns \
-        adm apache bin daemon games gdm halt ident junkbust lp mail mailnull \
+        adm apache bin daemon games gdm halt http ident junkbust lp mail mailnull \
         named news nfsnobody nobody nscd ntp operator pcap postgres radvd \
         rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs avahi-autoipd\
         avahi backup messagebus beagleindex debian-tor dhcp dnsmasq fetchmail\
@@ -214,6 +215,11 @@ function remind() {
     sleep $1 && notify-send "$2" &
 }
 
+human_filesize() { 
+  awk -v sum="$1" ' BEGIN {hum[1024^3]="Gb"; hum[1024^2]="Mb"; hum[1024]="Kb"; for (x=1024^3; x>=1024; x/=1024) { if (sum>=x) { printf "%.2f %s\n",sum/x,hum[x]; break; } } if (sum<1024) print "1kb"; } '
+}
+
+
 alias c='clear'
 alias f='file'
 alias ls='ls --color=auto'
@@ -237,11 +243,9 @@ alias conf='cd ~/.config'
 alias ssh='export TERM=xterm-color && ssh'
 alias dev='cd ~/Development'
 alias down='cd ~/Downloads'
-alias backup='sh ~/github/pdq/backup.sh'
-alias nc='ncmpcpp'
+#alias nc='ncmpcpp'
 alias grep='grep --color=auto'
 alias mounthdd='sudo udisks --mount /dev/sdb4'
-alias mounthdd3='sudo udisks --mount /dev/sdb3'
 alias sploit='/opt/metasploit-4.2.0/msfconsole'
 alias kdeicons='rm ~/.kde4/cache-linux/icon-cache.kcache'
 alias deltrash1='sudo rm -rv /media/truecrypt1/.Trash-1000/'
@@ -270,6 +274,7 @@ alias killdoll="sudo killall -q kactivitymanagerd; sudo killall -q kdeinit4; sud
 alias psg='ps aux | grep'  #requires an argument
 alias cpufreq='watch grep \"cpu MHz\" /proc/cpuinfo'
 alias nets='ls /sys/class/net'
+alias rss='cd ~/bin && python rss_notifier.py &'
 # chmod commands
 #alias mx='chmod a+x' 
 #alias 000='chmod 000'
