@@ -264,7 +264,11 @@ alias sp='sudo poweroff'
 alias sd='systemctl'
 alias md5='md5sum'
 alias mirror='sudo reflector -c "Canada United States" -f 6 > mirrorlist'
-alias killdoll="sudo killall -q kactivitymanagerd; sudo killall -q kdeinit4; sudo killall -q kded4; sudo killall -q knotify4; sudo killall -q kuiserver; sudo killall -q kglobalaccel; sudo killall -q klauncher; sudo killall -q dolphin; echo 'all kde stuffs killed...'"
+alias killdoll="sudo killall -q kio_http_cache_; sudo killall -q kactivitymanagerd; sudo killall -q kdeinit4; sudo killall -q kded4; sudo killall -q knotify4; sudo killall -q kuiserver; sudo killall -q kglobalaccel; sudo killall -q klauncher; sudo killall -q dolphin; echo 'all kde stuffs killed...'"
+alias checkvid='mplayer -vo null -ao null -identify -frames 0'
+alias thumb='convert -resize 250x250'
+alias plocal='pacman -Qqm | grep -vx "$(cat $HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/local.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/local.lst)'
+alias pmain='pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" | grep -vx "$(<$HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/main.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/main.lst)'
 # control hardware
 #alias cdo='eject /dev/cdrecorder'
 #alias cdc='eject -t /dev/cdrecorder'
