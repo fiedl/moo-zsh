@@ -155,7 +155,7 @@ prompt_gtmanfred_setup() {
     zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b|%F{c}%r%f'
     zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
-    PROMPT='┌─ %B%F{blue}%n%f%b %F{green}at%f %B%F{blue}%m%f%b %F{green}in%f %B%F{blue}%~%f%b ${vcs_info_msg_0_}%{$reset_color%}$prompt_newline$(prompt_char)%f'
+    PROMPT='┌─ %B%F{blue}%n%f%b %F{yellow}at%f %B%F{blue}%m%f%b %F{yellow}in%f %B%F{blue}%~%f%b ${vcs_info_msg_0_}%{$reset_color%}$prompt_newline$(prompt_char)%f'
 
     RPROMPT="%(?,%F{blue}(⌐■_■),%F{yellow}%? %F{red}（╯°□°）╯︵ ┻━┻)%f"
     PS4='+%N:%i:%x:%I>'
