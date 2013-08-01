@@ -49,7 +49,6 @@ if [ -f $HOME/.ssh/known_hosts ] ; then
     hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
     zstyle ':completion:*:hosts' hosts $hosts
 fi
-
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:*:users' ignored-patterns \
@@ -68,6 +67,11 @@ compinit
 
 autoload -U promptinit
 promptinit
+
+# edit inline
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
 
 #autoload -U colors && colors
 # create a zkbd compatible hash;
@@ -211,7 +215,7 @@ screenfetch -D "Arch Linux"
 
 # usage: remind <time> <text>
 # e.g.: remind 10m "omg, the pizza"
-function remind() {
+remind() {
     sleep $1 && notify-send "$2" &
 }
 
@@ -219,12 +223,12 @@ human_filesize() {
   awk -v sum="$1" ' BEGIN {hum[1024^3]="Gb"; hum[1024^2]="Mb"; hum[1024]="Kb"; for (x=1024^3; x>=1024; x/=1024) { if (sum>=x) { printf "%.2f %s\n",sum/x,hum[x]; break; } } if (sum<1024) print "1kb"; } '
 }
 
-
 alias c='clear'
 alias f='file'
 alias ls='ls --color=auto'
 alias ping='ping -c 5'
 alias pong='tsocks ping -c 5'
+alias jacklog='strace -ff -e trace=write -e write=1,2 -p'
 # safety features
 alias cp='cp -i'
 alias mv='mv -i'
@@ -234,51 +238,37 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 # fun stuffs
-#alias bender='cowsay -f bender $(fortune -so)'
 alias matrix='cmatrix -C magenta'
 # useful stuffs
 alias ..='cd ..'
-alias home='cd ~'
-alias conf='cd ~/.config'
 alias ssh='export TERM=xterm-color && ssh'
-alias dev='cd ~/Development'
-alias down='cd ~/Downloads'
-#alias nc='ncmpcpp'
 alias grep='grep --color=auto'
-alias mounthdd='sudo udisks --mount /dev/sdb4'
-alias sploit='/opt/metasploit-4.2.0/msfconsole'
-alias kdeicons='rm ~/.kde4/cache-linux/icon-cache.kcache'
-alias deltrash1='sudo rm -rv /media/truecrypt1/.Trash-1000/'
-alias deltrash2='sudo rm -rv /media/truecrypt2/.Trash-1000/'
-alias deltrash='rm -rv ~/.local/share/Trash/'
-alias sdeltrash1='sudo srm -rv /media/truecrypt1/.Trash-1000/'
-alias sdeltrash2='sudo srm -rv /media/truecrypt2/.Trash-1000/'
-alias sdeltrash='srm -rv ~/.local/share/Trash/'
-alias delthumbs='rm -rv ~/.thumbnails/ && rm ~/.kde4/cache-linux/icon-cache.kcache'
+alias delthumbs='rm -rv ~/.thumbnails/ && rm ~/.kde4/cache-$HOST/icon-cache.kcache'
 alias reload='source ~/.zshrc'
-alias xdef='xrdb -merge ~/.Xdefaults' 
+alias xreload='xrdb ~/.Xdefaults' 
 alias delfonts='fc-cache -vf'
 alias cclean='sudo pkgcacheclean -v'
-alias sr='sudo reboot'
-alias sp='sudo poweroff'
-alias sd='systemctl'
+alias exitclean='disown -a && exit'
+alias sy='systemctl'
 alias md5='md5sum'
-alias mirror='sudo reflector -c "Canada United States" -f 6 > mirrorlist'
 alias killdoll="sudo killall -q kio_http_cache_; sudo killall -q kactivitymanagerd; sudo killall -q kdeinit4; sudo killall -q kded4; sudo killall -q knotify4; sudo killall -q kuiserver; sudo killall -q kglobalaccel; sudo killall -q klauncher; sudo killall -q dolphin; echo 'all kde stuffs killed...'"
 alias checkvid='mplayer -vo null -ao null -identify -frames 0'
-alias thumb='convert -resize 250x250'
+alias 2thumb='convert -resize 250x250'
 alias plocal='pacman -Qqm | grep -vx "$(cat $HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/local.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/local.lst)'
 alias pmain='pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" | grep -vx "$(<$HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/main.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/main.lst)'
+alias addclock='while sleep 1;DATE=$(date);do tput sc;tput cup 0 $(($(tput cols)-${#DATE}));printf "$DATE";tput rc;done &'
 # control hardware
 #alias cdo='eject /dev/cdrecorder'
 #alias cdc='eject -t /dev/cdrecorder'
 #alias dvdo='eject /dev/dvd'
 #alias dvdc='eject -t /dev/dvd'
-# modified commands
+# more custom commands
 alias psg='ps aux | grep'  #requires an argument
 alias cpufreq='watch grep \"cpu MHz\" /proc/cpuinfo'
 alias nets='ls /sys/class/net'
-alias rss='cd ~/bin && python rss_notifier.py &'
+alias topnet='lsof -P -i -n'
+alias 2png='convert label:@- cmd.png' # <command> | 2png
+alias 2mp3='mplayer -ao pcm -vo null -vc dummy -dumpaudio -dumpfile' # 2mp3 <output-file> <input-file>
 # chmod commands
 #alias mx='chmod a+x' 
 #alias 000='chmod 000'
@@ -289,7 +279,7 @@ alias p="sudo pacman -S"         # install one or more packages
 alias pp="pacman -Ss"            # search for a package using one or more keywords
 alias qs="pacman -Qs"            # search for installed package using one or more keywords
 alias syu="sudo pacman -Syu"     # upgrade all packages to their newest version
-alias pacremove="sudo pacman -R" # uninstall one or more packages
+alias rr="sudo pacman -R" # uninstall one or more packages
 alias rs="sudo pacman -Rs"       # uninstall one or more packages and its dependencies 
 # packer
 # alias a="packer"
@@ -302,19 +292,16 @@ alias a="pacaur -S"               # search packages
 alias aa="pacaur -s"              # install package
 alias syua="pacaur -Syua"         # update aur packages
 alias syud="pacaur -Syua --devel" # update devel packages
-alias up="sudo pacman -Syu && pacaur -Syua"
-# cower
+alias pac="sudo pacman -Syu && pacaur -Syua"
 alias cow="cower -u -v"
+alias update='sudo powerpill -Syu && cower -u -v'
 # git hub
 alias git=hub
 alias commit="git commit -m"
 alias push="git push origin master"
 # systemd services
-alias trstart='sudo systemctl start transmission'
-alias trstop='sudo systemctl stop transmission'
-alias lampstart='sudo lamp start'
-alias lampstop='sudo lamp stop'
-alias scripts='sh ~/.config/awesome/global_script.sh'
+#alias trstart='sudo systemctl start transmission'
+#alias trstop='sudo systemctl stop transmission'
 #alias steam='export STEAM_RUNTIME=0 && export SDL_AUDIODRIVER=alsa && steam'
 # suffix aliases
 alias -s php=subl
@@ -331,8 +318,6 @@ alias -s java=$EDITOR
 alias -s txt=$EDITOR
 alias -s PKGBUILD=$EDITOR
 hash -d github=$HOME/github
-hash -d movies=/media/truecrypt2/movies
-hash -d tvshows=/media/truecrypt1/tv
 hash -d units=/usr/lib/systemd/system/
 # global aliases
 alias -g ...='../..'
