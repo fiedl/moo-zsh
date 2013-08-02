@@ -159,9 +159,9 @@ prompt_gtmanfred_setup() {
     zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b|%F{c}%r%f'
     zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
-    PROMPT='┌─ %B%F{blue}%n%f%b %F{yellow}at%f %B%F{blue}%m%f%b %F{yellow}in%f %B%F{blue}%~%f%b ${vcs_info_msg_0_}%{$reset_color%}$prompt_newline$(prompt_char)%f'
+    PROMPT='┌─ %B%F{blue}%n%f%b %F{red}at%f %B%F{blue}%m%f%b %F{red}in%f %B%F{blue}%~%f%b ${vcs_info_msg_0_}%{$reset_color%}$prompt_newline$(prompt_char)%f'
 
-    RPROMPT="%(?,%F{blue}(⌐■_■),%F{yellow}%? %F{red}（╯°□°）╯︵ ┻━┻)%f"
+    RPROMPT="%(?,%F{blue}(⌐■_■),%F{red}%? %F{red}（╯°□°）╯︵ ┻━┻)%f"
     PS4='+%N:%i:%x:%I>'
 }
 
@@ -223,6 +223,7 @@ human_filesize() {
   awk -v sum="$1" ' BEGIN {hum[1024^3]="Gb"; hum[1024^2]="Mb"; hum[1024]="Kb"; for (x=1024^3; x>=1024; x/=1024) { if (sum>=x) { printf "%.2f %s\n",sum/x,hum[x]; break; } } if (sum<1024) print "1kb"; } '
 }
 
+alias sudo='sudo '
 alias c='clear'
 alias f='file'
 alias ls='ls --color=auto'
@@ -257,6 +258,7 @@ alias 2thumb='convert -resize 250x250'
 alias plocal='pacman -Qqm | grep -vx "$(cat $HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/local.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/local.lst)'
 alias pmain='pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" | grep -vx "$(<$HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/main.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/main.lst)'
 alias addclock='while sleep 1;DATE=$(date);do tput sc;tput cup 0 $(($(tput cols)-${#DATE}));printf "$DATE";tput rc;done &'
+alias yt='youtube-viewer'
 # control hardware
 #alias cdo='eject /dev/cdrecorder'
 #alias cdc='eject -t /dev/cdrecorder'
@@ -281,10 +283,6 @@ alias qs="pacman -Qs"            # search for installed package using one or mor
 alias syu="sudo pacman -Syu"     # upgrade all packages to their newest version
 alias rr="sudo pacman -R" # uninstall one or more packages
 alias rs="sudo pacman -Rs"       # uninstall one or more packages and its dependencies 
-# packer
-# alias a="packer"
-# alias sa="packer -S"
-# alias syua="packer -Syu --auronly"
 # powerpill
 alias pillu="sudo powerpill -Syu"
 alias pill="sudo powerpill -S"
