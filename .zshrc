@@ -3,6 +3,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILESIZE=${HISTSIZE} ## bash will remember N commands
 HISTCONTROL=ignoreboth   ## ingore duplicates and spaces (ignoreboth, ignoredups, ignorespace)
+REPORTTIME=10 # print elapsed time when more than 10 seconds
 
 ## don't append the following to history: consecutive duplicate
 ## commands, ls, bg and fg, and exit
@@ -64,7 +65,9 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         proxy syslog www-data mldonkey sys snort
 
 setopt completealiases
+setopt completeinword
 setopt autocd
+setopt interactivecomments # pound sign in interactive prompt
 
 autoload -Uz compinit
 compinit
@@ -272,6 +275,24 @@ logjack() {
    strace -ff -e trace=write -e write=1,2 -p $APP
 }
 
+## usage: cdl <directory> 
+## result: it will automatically execute the command 'ls -al' after cd
+cdl()    {
+   cd "$@";
+   ls -al;
+}
+
+mcd () {
+    mkdir -vp "$1";
+    cd "$1"
+}
+
+## Grabs the disk usage in the current directory
+alias usage='du -ch 2> /dev/null | tail -1'
+
+## Gives you what is using the most space, both directories and files
+alias most='du -hsx * | sort -rh | head -10'
+
 ## usage: pxclip 
 ## result: pastes code from clipboard and fills clipboard with URL of paste
 alias pxclip='wgetpaste --service gists --language Shell  --xcut --xclippaste'
@@ -282,12 +303,13 @@ alias google='goo'
 alias googleimages='gi'
 alias startpage='sp'
 alias sudo='sudo '
+alias _='sudo'
 alias c='clear'
 alias f='file'
 alias ls='ls --color=auto'
 alias ping='ping -c 5'
 alias pong='tsocks ping -c 5'
-# safety features
+## safety features
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -I'                    # 'rm -i' prompts for every file
@@ -295,9 +317,26 @@ alias ln='ln -i'
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
-# fun stuffs
+## Push and pop directories on directory stack
+alias pu='pushd'
+alias po='popd'
+alias .p="pushd ."
+alias p.="popd"
+## fun stuffs
 alias matrix='cmatrix -C magenta'
-# useful stuffs
+## TV streams
+alias ajz='rtmpdump -q -v -r "rtmp://aljazeeraflashlivefs.fplive.net/aljazeeraflashlive-live/aljazeera_eng_med" | vlc --input-title-format "Aljazeera" - &'
+alias cnn='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge/cnn_live" -W "http://msnbclive.eu/player.swf" -p "http://blog.livenewschat.tv/situation-chatroom" | vlc -q --input-title-format "CNN Live" - &'
+alias cnni='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge/cnni_live" -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://blog.livenewschat.tv/international-room-chat" | vlc -q --input-title-format "CNN International" - &'
+alias cspan='rtmpdump -q -v -r "rtmp://cp82346.live.edgefcs.net:1935/live" -y CSPAN1@14845 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN/" | vlc -q --input-title-format "CSPAN" - &'
+alias cspan2='rtmpdump -q -v -r "rtmp://cp82347.live.edgefcs.net:1935/live" -y CSPAN2@14846 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN2/" | vlc -q --input-title-format "CSPAN2" - &'
+alias cspan3='rtmpdump -q -v -r "rtmp://cp82348.live.edgefcs.net:1935/live" -y CSPAN3@14847 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN3/" | vlc -q --input-title-format "CSPAN3" - &'
+alias msnbc='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge" -y msnbc_live -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://www.rentadrone.tv/msnbc-live-rockinroosters/" | vlc -q --input-title-format "MSNBC" - &'
+alias rt='rtmpdump -q -v -r "rtmp://rt.fms-04.visionip.tv/live/rt-global-live-HD" -a live -W "http://rt.com/s/swf/player5.4.viral.swf" | vlc -q --input-title-format "Russia Today" - &'
+alias hln='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge" -y "hln_live" -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://www.rentadrone.tv/msnbc-live-rockinroosters/" | vlc -q --input-title-format "HLN" - &'
+## useful stuffs
+# Show history
+alias history='fc -l 1'
 alias ..='cd ..'
 alias ssh='export TERM=xterm-color && ssh'
 alias grep='grep --color=auto'
@@ -316,6 +355,9 @@ alias checkvid='mplayer -vo null -ao null -identify -frames 0'
 alias 2thumb='convert -resize 250x250'
 alias addclock='while sleep 1;DATE=$(date);do tput sc;tput cup 0 $(($(tput cols)-${#DATE}));printf "$DATE";tput rc;done &'
 alias yt='youtube-viewer'
+alias nocomment='grep -Ev '\''^(#|$)'\'''
+#progress bar on file copy. Useful evenlocal.
+alias cpr="rsync --progress -ravz"
 # control hardware
 #alias cdo='eject /dev/cdrecorder'
 #alias cdc='eject -t /dev/cdrecorder'
@@ -330,19 +372,19 @@ alias topnet='lsof -P -i -n'
 alias 2png='convert label:@- cmd.png'
 ## usage: 2mp3 <output-file> <input-file>
 alias 2mp3='mplayer -ao pcm -vo null -vc dummy -dumpaudio -dumpfile'
-# chmod commands
+## chmod commands
 #alias mx='chmod a+x' 
 #alias 000='chmod 000'
 #alias 644='chmod 644'
 #alias 755='chmod 755'
-# pacman
+## pacman
 alias p="sudo pacman -S"         # install one or more packages
 alias pp="pacman -Ss"            # search for a package using one or more keywords
 alias qs="pacman -Qs"            # search for installed package using one or more keywords
 alias syu="sudo pacman -Syu"     # upgrade all packages to their newest version
 alias rr="sudo pacman -R" # uninstall one or more packages
 alias rs="sudo pacman -Rs"       # uninstall one or more packages and its dependencies 
-# powerpill
+## powerpill
 alias pillu="sudo powerpill -Syu"
 alias pill="sudo powerpill -S"
 alias a="pacaur -S"               # search packages
@@ -354,13 +396,16 @@ alias cow="cower -u -v"
 alias update='sudo powerpill -Syu && cower -u -v'
 alias plocal='pacman -Qqm | grep -vx "$(cat $HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/local.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/local.lst)'
 alias pmain='pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" | grep -vx "$(<$HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/main.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/main.lst)'
-# git hub
+## git hub
 alias git=hub
 alias commit="git commit -m"
 alias push="git push origin master"
-# systemd services
+## typos
+alias exiy='exit'
+alias rload='reload'
+## systemd services
 #alias steam='export STEAM_RUNTIME=0 && export SDL_AUDIODRIVER=alsa && steam'
-# suffix aliases
+## suffix aliases
 alias -s php=subl3
 alias -s html=firefox
 alias -s png=feh
@@ -376,7 +421,7 @@ alias -s txt=$EDITOR
 alias -s PKGBUILD=$EDITOR
 hash -d github=$HOME/github
 hash -d units=/usr/lib/systemd/system/
-# global aliases
+## global aliases
 alias -g ...='../..'
 alias -g C='| wc -l'
 alias -g D="DISPLAY=:0.0"
