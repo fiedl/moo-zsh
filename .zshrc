@@ -1,10 +1,11 @@
 HISTFILE=~/.histfile_`hostname`
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILESIZE=${HISTSIZE}                    # bash will remember N commands
-HISTCONTROL=ignoreboth                      # ingore duplicates and spaces (ignoreboth, ignoredups, ignorespace)
-# don't append the following to history: consecutive duplicate
-# commands, ls, bg and fg, and exit
+HISTFILESIZE=${HISTSIZE} ## bash will remember N commands
+HISTCONTROL=ignoreboth   ## ingore duplicates and spaces (ignoreboth, ignoredups, ignorespace)
+
+## don't append the following to history: consecutive duplicate
+## commands, ls, bg and fg, and exit
 HISTIGNORE='\&:fg:bg:ls:pwd:cd ..:cd ~-:cd -:cd:jobs:set -x:ls -l:ls -l'
 HISTIGNORE=${HISTIGNORE}':%1:%2:shutdown*'
 export HISTIGNORE
@@ -14,7 +15,7 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local}
 export MOZ_DISABLE_PANGO=1
 
-# if exists, add ~/bin to PATH
+## if !/bin exists, add ~/bin to PATH
 if [ -d ~/bin ] ; then
    PATH=~/bin:$PATH
 fi
@@ -22,16 +23,17 @@ fi
 if [ -d ~/.gem/ruby/1.9.1/bin ] ; then
    PATH=~/.gem/ruby/1.9.1/bin:$PATH
 fi
+
 ## clipbored options for dmenurl/dmenuclip
 #export CLIPBORED_DMENU_FONT=terminus
-export CLIPBORED_DMENU_NORMAL_FG=#4FFF64
+#export CLIPBORED_DMENU_NORMAL_FG=#4FFF64
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 bindkey -e
 
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
+## End of lines configured by zsh-newuser-install
+## The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion:*:pacman:*' force-list always
@@ -42,14 +44,16 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*'   force-list always
-# match uppercase from lowercase
+## match uppercase from lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-# 1. All /etc/hosts hostnames are in autocomplete
+
+## 1. All /etc/hosts hostnames are in autocomplete
 if [ -f $HOME/.ssh/known_hosts ] ; then
     hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
     zstyle ':completion:*:hosts' hosts $hosts
 fi
-# ignore completion functions (until the _ignored completer)
+
+## ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:*:users' ignored-patterns \
         adm apache bin daemon games gdm halt http ident junkbust lp mail mailnull \
@@ -68,14 +72,14 @@ compinit
 autoload -U promptinit
 promptinit
 
-# edit inline
+## edit inline
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
 
 #autoload -U colors && colors
-# create a zkbd compatible hash;
-# to add other keys to this hash, see: man 5 terminfo
+## create a zkbd compatible hash;
+## to add other keys to this hash, see: man 5 terminfo
 typeset -A key
 
 key[Home]=${terminfo[khome]}
@@ -90,7 +94,7 @@ key[Right]=${terminfo[kcuf1]}
 key[PageUp]=${terminfo[kpp]}
 key[PageDown]=${terminfo[knp]}
 
-# setup key accordingly
+## setup key accordingly
 [[ -n "${key[Home]}"    ]]  && bindkey  "${key[Home]}"    beginning-of-line
 [[ -n "${key[End]}"     ]]  && bindkey  "${key[End]}"     end-of-line
 [[ -n "${key[Insert]}"  ]]  && bindkey  "${key[Insert]}"  overwrite-mode
@@ -100,12 +104,13 @@ key[PageDown]=${terminfo[knp]}
 [[ -n "${key[Left]}"    ]]  && bindkey  "${key[Left]}"    backward-char
 [[ -n "${key[Right]}"   ]]  && bindkey  "${key[Right]}"   forward-char
 
-# Finally, make sure the terminal is in application mode, when zle is
-# active. Only then are the values from $terminfo valid.
+## Finally, make sure the terminal is in application mode, when zle is
+## active. Only then are the values from $terminfo valid.
 
 function zle-line-init () {
     echoti smkx
 }
+
 function zle-line-finish () {
     echoti rmkx
 }
@@ -115,8 +120,8 @@ zle -N zle-line-finish
 
 watch=all
 LOGCHECK=60
-# End of lines added by compinstall
-# This will set the default prompt to the walters theme
+## End of lines added by compinstall
+## This will set the default prompt to the walters theme
 LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
 export LS_COLORS
 
@@ -126,7 +131,7 @@ prompt_char(){
 }
 
 vi-git-status () {
-  # Untracked files.
+  ## Untracked files.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
     hook_com[unstaged]='%F{r}?%f'
   fi
@@ -170,7 +175,7 @@ prompt_gtmanfred_preview(){
 }
 prompt_gtmanfred_setup "$@"
 
-# Window title
+## Window title
 case $TERM in
     termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
 		precmd () { print -Pn "\e]0;[%n@%M][%~]%#\a" } 
@@ -188,10 +193,10 @@ case $TERM in
 	;; 
 esac
 
-# hub tab-completion script for zsh.
-# This script complements the completion script that ships with git.
+## hub tab-completion script for zsh.
+## This script complements the completion script that ships with git.
 
-# Autoload _git completion functions
+## Autoload _git completion functions
 if declare -f _git > /dev/null; then
   _git
 fi
@@ -205,24 +210,27 @@ if declare -f _git_commands > /dev/null; then
     'browse:browse the project on GitHub'
     'compare:open GitHub compare view'
   )
-  # Extend the '_git_commands' function with hub commands
+  ## Extend the '_git_commands' function with hub commands
   eval "$(declare -f _git_commands | sed -e 's/base_commands=(/base_commands=(${_hub_commands} /')"
 fi
 
 set -o notify 
 
+## information
 screenfetch -D "Arch Linux"
 
-# usage: remind <time> <text>
-# e.g.: remind 10m "omg, the pizza"
+## usage: remind <time> <text>
+## e.g.: remind 10m "omg, the pizza"
 remind() {
     sleep $1 && notify-send "$2" &
 }
 
+## usage: human_filesize <size in bytes>
 human_filesize() { 
   awk -v sum="$1" ' BEGIN {hum[1024^3]="Gb"; hum[1024^2]="Mb"; hum[1024]="Kb"; for (x=1024^3; x>=1024; x/=1024) { if (sum>=x) { printf "%.2f %s\n",sum/x,hum[x]; break; } } if (sum<1024) print "1kb"; } '
 }
 
+## usage: goo "pizza hut"
 goo() { 
   gg="https://www.google.com/search?q="
   ff="firefox"
@@ -233,6 +241,19 @@ goo() {
   fi 
 }
 
+## usage: gi "cats"
+gi() { 
+  gg="https://www.google.com/search?q="
+  ff="firefox"
+  if [ $1 ]; then
+    "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})"&tbm=isch"
+  else
+    echo 'Usage: gi (googleimages) "[seach term]"'
+  fi 
+}
+
+## usage: remind <time> <text>
+## e.g.: remind 10m "omg, the pizza"
 sp() { 
   gg="https://startpage.com/do/search?q="
   ff="firefox"
@@ -244,9 +265,21 @@ sp() {
   fi 
 }
 
-alias pxclip='wgetpaste --service gists --language Shell  --xcut --xclippaste' # paste code from clipboard and fill clipboard with URL of paste
+## usage: logjack <application>
+## e.g.: logjack firefox
+logjack() {
+   APP="$(pidof $1)"
+   strace -ff -e trace=write -e write=1,2 -p $APP
+}
+
+## usage: pxclip 
+## result: pastes code from clipboard and fills clipboard with URL of paste
+alias pxclip='wgetpaste --service gists --language Shell  --xcut --xclippaste'
+## usage: cat <file> | pfile
+## e.g.: cat ~/.zshrc | pfile
 alias pfile='wgetpaste --service gists --language Shell --xclippaste'
 alias google='goo'
+alias googleimages='gi'
 alias startpage='sp'
 alias sudo='sudo '
 alias c='clear'
@@ -254,7 +287,6 @@ alias f='file'
 alias ls='ls --color=auto'
 alias ping='ping -c 5'
 alias pong='tsocks ping -c 5'
-alias jacklog='strace -ff -e trace=write -e write=1,2 -p'
 # safety features
 alias cp='cp -i'
 alias mv='mv -i'
@@ -278,10 +310,10 @@ alias exitclean='disown -a && exit'
 alias sy='systemctl'
 alias md5='md5sum'
 alias killdoll="sudo killall -q kio_http_cache_; sudo killall -q kactivitymanagerd; sudo killall -q kdeinit4; sudo killall -q kded4; sudo killall -q knotify4; sudo killall -q kuiserver; sudo killall -q kglobalaccel; sudo killall -q klauncher; sudo killall -q dolphin; echo 'all kde stuffs killed...'"
+## usage: checkvid <video file>
 alias checkvid='mplayer -vo null -ao null -identify -frames 0'
+## usage: 2thumb <image file>
 alias 2thumb='convert -resize 250x250'
-alias plocal='pacman -Qqm | grep -vx "$(cat $HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/local.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/local.lst)'
-alias pmain='pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" | grep -vx "$(<$HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/main.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/main.lst)'
 alias addclock='while sleep 1;DATE=$(date);do tput sc;tput cup 0 $(($(tput cols)-${#DATE}));printf "$DATE";tput rc;done &'
 alias yt='youtube-viewer'
 # control hardware
@@ -294,8 +326,10 @@ alias psg='ps aux | grep'  #requires an argument
 alias cpufreq='watch grep \"cpu MHz\" /proc/cpuinfo'
 alias nets='ls /sys/class/net'
 alias topnet='lsof -P -i -n'
-alias 2png='convert label:@- cmd.png' # <command> | 2png
-alias 2mp3='mplayer -ao pcm -vo null -vc dummy -dumpaudio -dumpfile' # 2mp3 <output-file> <input-file>
+## usage: <command> | 2png
+alias 2png='convert label:@- cmd.png'
+## usage: 2mp3 <output-file> <input-file>
+alias 2mp3='mplayer -ao pcm -vo null -vc dummy -dumpaudio -dumpfile'
 # chmod commands
 #alias mx='chmod a+x' 
 #alias 000='chmod 000'
@@ -318,23 +352,23 @@ alias syud="pacaur -Syua --devel" # update devel packages
 alias pac="sudo pacman -Syu && pacaur -Syua"
 alias cow="cower -u -v"
 alias update='sudo powerpill -Syu && cower -u -v'
+alias plocal='pacman -Qqm | grep -vx "$(cat $HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/local.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/local.lst)'
+alias pmain='pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" | grep -vx "$(<$HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/main.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/main.lst)'
 # git hub
 alias git=hub
 alias commit="git commit -m"
 alias push="git push origin master"
 # systemd services
-#alias trstart='sudo systemctl start transmission'
-#alias trstop='sudo systemctl stop transmission'
 #alias steam='export STEAM_RUNTIME=0 && export SDL_AUDIODRIVER=alsa && steam'
 # suffix aliases
-alias -s php=subl
-alias -s html=luakit
-alias -s png=gpicview
-alias -s jpg=gpicview
-alias -s gif=gpicview
-alias -s GIF=gpicview
-alias -s JPG=gpicview
-alias -s PNG=gpicview
+alias -s php=subl3
+alias -s html=firefox
+alias -s png=feh
+alias -s jpg=feh
+alias -s gif=feh
+alias -s GIF=feh
+alias -s JPG=feh
+alias -s PNG=feh
 alias -s gz='tar -xzvf'
 alias -s bz2='tar -xjvf'
 alias -s java=$EDITOR
