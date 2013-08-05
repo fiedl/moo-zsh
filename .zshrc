@@ -223,6 +223,31 @@ human_filesize() {
   awk -v sum="$1" ' BEGIN {hum[1024^3]="Gb"; hum[1024^2]="Mb"; hum[1024]="Kb"; for (x=1024^3; x>=1024; x/=1024) { if (sum>=x) { printf "%.2f %s\n",sum/x,hum[x]; break; } } if (sum<1024) print "1kb"; } '
 }
 
+goo() { 
+  gg="https://www.google.com/search?q="
+  ff="firefox"
+  if [ $1 ]; then
+    "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})
+  else
+    echo 'Usage: goo (google) "[seach term]"'
+  fi 
+}
+
+sp() { 
+  gg="https://startpage.com/do/search?q="
+  ff="firefox"
+  term="$1"
+  if [ $1 ]; then
+    "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})
+  else
+    echo 'Usage: sp (startpage) "[seach term]"'
+  fi 
+}
+
+alias pxclip='wgetpaste --service gists --language Shell  --xcut --xclippaste' # paste code from clipboard and fill clipboard with URL of paste
+alias pfile='wgetpaste --service gists --language Shell --xclippaste'
+alias google='goo'
+alias startpage='sp'
 alias sudo='sudo '
 alias c='clear'
 alias f='file'
