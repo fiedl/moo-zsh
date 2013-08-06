@@ -334,6 +334,7 @@ alias cspan3='rtmpdump -q -v -r "rtmp://cp82348.live.edgefcs.net:1935/live" -y C
 alias msnbc='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge" -y msnbc_live -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://www.rentadrone.tv/msnbc-live-rockinroosters/" | vlc -q --input-title-format "MSNBC" - &'
 alias rt='rtmpdump -q -v -r "rtmp://rt.fms-04.visionip.tv/live/rt-global-live-HD" -a live -W "http://rt.com/s/swf/player5.4.viral.swf" | vlc -q --input-title-format "Russia Today" - &'
 alias hln='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge" -y "hln_live" -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://www.rentadrone.tv/msnbc-live-rockinroosters/" | vlc -q --input-title-format "HLN" - &'
+alias yt='youtube-viewer  --prefer-https --prefer-webm --use-colors --quiet --7 -S -C -q --mplayer="/usr/bin/vlc" --mplayer-args="-q"'
 ## useful stuffs
 # Show history
 alias history='fc -l 1'
@@ -354,7 +355,6 @@ alias checkvid='mplayer -vo null -ao null -identify -frames 0'
 ## usage: 2thumb <image file>
 alias 2thumb='convert -resize 250x250'
 alias addclock='while sleep 1;DATE=$(date);do tput sc;tput cup 0 $(($(tput cols)-${#DATE}));printf "$DATE";tput rc;done &'
-alias yt='youtube-viewer'
 alias nocomment='grep -Ev '\''^(#|$)'\'''
 #progress bar on file copy. Useful evenlocal.
 alias cpr="rsync --progress -ravz"
