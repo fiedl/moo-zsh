@@ -396,6 +396,9 @@ alias cow="cower -u -v"
 alias update='sudo powerpill -Syu && cower -u -v'
 alias plocal='pacman -Qqm | grep -vx "$(cat $HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/local.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/local.lst)'
 alias pmain='pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" | grep -vx "$(<$HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/main.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/main.lst)'
+alias z="schroot -p -- pacaur -S"               # chroot search packages
+alias x="schroot -p -- sudo pacman -SS"         # chroot search packages
+alias zzz="schroot -p --"               # chroot
 ## git hub
 alias git=hub
 alias commit="git commit -m"
