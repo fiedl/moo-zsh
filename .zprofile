@@ -7,9 +7,9 @@ export EDITOR="nano"
 export PATH=$PATH:/usr/local/bin
 #export WEBKIT_IGNORE_SSL_ERRORS="1" midori
 export MOZ_PLUGIN_PATH="/usr/lib/mozilla/plugins"
+export QT_PLUGIN_PATH=$HOME/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/
 #export XDG_CACHE_HOME=/dev/shm/$HOME/.cache
-if [ ! -f $XDG_CACHE_HOME ];
-then
+if [ ! -f $XDG_CACHE_HOME ]; then
     mkdir -p -m 0700 $XDG_CACHE_HOME
 fi
 
