@@ -220,7 +220,7 @@ fi
 set -o notify 
 
 ## information
-screenfetch -D "Arch Linux"
+screenfetch -D "mooOS"
 
 ## usage: remind <time> <text>
 ## e.g.: remind 10m "omg, the pizza"
