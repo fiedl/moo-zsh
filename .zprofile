@@ -25,24 +25,24 @@ if [ -f "${HOME}/.ssh/id_rsa" ] ; then
 fi
 
 # mounted success files
-tc1="/media/truecrypt3/test"
-thd1="/dev/sdb"
+#tc1="/media/truecrypt3/test"
+#thd1="/dev/sdb"
 
-if [ -f "$tc1" ] ; then
- 	echo "[SKIP] It appears your primary data is already mounted, proceeding to secondary data..."
-else
- 	echo "[WAIT] Decrypt primary data and proceed to desktop session"
+#if [ -f "$tc1" ] ; then
+# 	echo "[SKIP] It appears your primary data is already mounted, proceeding to secondary data..."
+#else
+ # 	echo "[WAIT] Decrypt primary data and proceed to desktop session"
 
-	truecrypt -k "" --protect-hidden=no $thd1 /media/truecrypt3
+	# truecrypt -k "" --protect-hidden=no $thd1 /media/truecrypt3
 
- 	if [ -f "$tc1" ] ; then
- 		echo "mounted /media/truecrypt3"
- 		#ogg123 -q "${HOME}/.config/awesome/sounds/voice-accepted.ogg"
- 	else
- 		echo "Incorrect passphrase..."
- 		#ogg123 -q "${HOME}/.config/awesome/sounds/voice-access-denied.ogg"
- 	fi
- fi
+ # 	if [ -f "$tc1" ] ; then
+ # 		echo "mounted /media/truecrypt3"
+ # 		#ogg123 -q "${HOME}/.config/awesome/sounds/voice-accepted.ogg"
+ # 	else
+ # 		echo "Incorrect passphrase..."
+ # 		#ogg123 -q "${HOME}/.config/awesome/sounds/voice-access-denied.ogg"
+ # 	fi
+ # fi
 
 cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
 [[ -f ~/.zshrc ]] && . ~/.zshrc
