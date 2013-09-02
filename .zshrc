@@ -238,7 +238,7 @@ goo() {
   gg="https://www.google.com/search?q="
   ff="firefox"
   if [ $1 ]; then
-    "$ff" -new-tab "$gg"$(echo "${1//[^a-zA-Z0-9]/+}")
+    "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})
   else
     echo 'Usage: goo (google) "[seach term]"'
   fi 
@@ -249,7 +249,7 @@ gi() {
   gg="https://www.google.com/search?q="
   ff="firefox"
   if [ $1 ]; then
-    "$ff" -new-tab "$gg"$(echo "${1//[^a-zA-Z0-9]/+}")"&tbm=isch"
+    "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})"&tbm=isch"
   else
     echo 'Usage: gi (googleimages) "[seach term]"'
   fi 
@@ -262,7 +262,7 @@ sp() {
   ff="firefox"
   term="$1"
   if [ $1 ]; then
-    "$ff" -new-tab "$gg"$(echo "${1//[^a-zA-Z0-9]/+}")
+    "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})
   else
     echo 'Usage: sp (startpage) "[seach term]"'
   fi 
