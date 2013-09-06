@@ -287,6 +287,40 @@ mcd () {
     cd "$1"
 }
 
+listd() { 
+    [[ -d /etc/systemd/system/multi-user.target.wants ]] && ls -l /etc/systemd/system/multi-user.target.wants
+    [[ -d /etc/systemd/system/default.target.wants ]] && ls -l /etc/systemd/system/default.target.wants
+    [[ -d /etc/systemd/system/remote-fs.target.wants ]] && ls -l /etc/systemd/system/remote-fs.target.wants
+}
+
+start() { 
+    sudo systemctl start $1.service
+    sudo systemctl status $1.service
+}
+
+restart() { 
+    sudo systemctl restart $1.service
+    sudo systemctl status $1.service
+}
+
+stop() { 
+    sudo systemctl stop $1.service
+    sudo systemctl status $1.service
+}
+
+status() { 
+    sudo systemctl status $1.service
+}
+
+enable() { 
+    sudo systemctl enable $1.service ; listd
+}
+
+disable() { 
+    sudo systemctl disable $1.service
+    listd
+}
+
 ## Grabs the disk usage in the current directory
 alias usage='du -ch 2> /dev/null | tail -1'
 
@@ -382,7 +416,7 @@ alias 2mp3='mplayer -ao pcm -vo null -vc dummy -dumpaudio -dumpfile'
 alias p="sudo pacman -S"         # install one or more packages
 alias pp="pacman -Ss"            # search for a package using one or more keywords
 alias qs="pacman -Qs"            # search for installed package using one or more keywords
-alias syu="sudo pacman -Syu"     # upgrade all packages to their newest version
+alias syu="sudo pacmatic -Syu"     # upgrade all packages to their newest version
 alias rr="sudo pacman -R" # uninstall one or more packages
 alias rs="sudo pacman -Rs"       # uninstall one or more packages and its dependencies 
 ## powerpill
@@ -390,9 +424,9 @@ alias pillu="sudo powerpill -Syu"
 alias pill="sudo powerpill -S"
 alias a="pacaur -S"               # search packages
 alias aa="pacaur -s"              # install package
-alias syua="pacaur -Syua"         # update aur packages
-alias syud="pacaur -Syua --devel" # update devel packages
-alias pac="sudo pacman -Syu && pacaur -Syua"
+alias syua="sudo pacmatic -Syu && pacaur -Syua"         # update aur packages
+alias syud="sudo pacmatic -Syu && pacaur -Syua --devel" # update devel packages
+#alias pac="sudo pacman -Syu && pacaur -Syua"
 alias cow="cower -u -v"
 alias update='sudo powerpill -Syu && cower -u -v'
 alias plocal='pacman -Qqm | grep -vx "$(cat $HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/local.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/local.lst)'
