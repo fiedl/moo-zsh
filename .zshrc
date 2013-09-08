@@ -287,6 +287,7 @@ mcd () {
     cd "$1"
 }
 
+## Services shortcuts and commonlyh used functions
 listd() { 
     [[ -d /etc/systemd/system/multi-user.target.wants ]] && ls -l /etc/systemd/system/multi-user.target.wants
     [[ -d /etc/systemd/system/default.target.wants ]] && ls -l /etc/systemd/system/default.target.wants
@@ -329,10 +330,10 @@ alias most='du -hsx * | sort -rh | head -10'
 
 ## usage: pxclip 
 ## result: pastes code from clipboard and fills clipboard with URL of paste
-alias pxclip='wgetpaste --service gists --language Shell  --xcut --xclippaste'
+alias pxclip='tsocks wgetpaste --service gists --language Shell  --xcut --xclippaste'
 ## usage: cat <file> | pfile
 ## e.g.: cat ~/.zshrc | pfile
-alias pfile='wgetpaste --service gists --language Shell --xclippaste'
+alias pfile='tsocks wgetpaste --service gists --language Shell --xclippaste'
 alias google='goo'
 alias googleimages='gi'
 alias startpage='sp'
@@ -341,12 +342,12 @@ alias _='sudo'
 alias c='clear'
 alias f='file'
 alias ls='ls --color=auto'
-alias ping='ping -c 5'
+alias ping='tsocks ping -c 5'
 alias pong='tsocks ping -c 5'
 ## safety features
 alias cp='cp -i'
 alias mv='mv -i'
-alias rm='rm -I'                    # 'rm -i' prompts for every file
+alias rm='rm -I'    # 'rm -i' prompts for every file
 alias ln='ln -i'
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
@@ -359,15 +360,25 @@ alias p.="popd"
 ## fun stuffs
 alias matrix='cmatrix -C magenta'
 ## TV streams
+## Aljazeera
 alias ajz='rtmpdump -q -v -r "rtmp://aljazeeraflashlivefs.fplive.net/aljazeeraflashlive-live/aljazeera_eng_med" | vlc --input-title-format "Aljazeera" - &'
+##  CNN
 alias cnn='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge/cnn_live" -W "http://msnbclive.eu/player.swf" -p "http://blog.livenewschat.tv/situation-chatroom" | vlc -q --input-title-format "CNN Live" - &'
+## CNN International
 alias cnni='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge/cnni_live" -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://blog.livenewschat.tv/international-room-chat" | vlc -q --input-title-format "CNN International" - &'
+## CSPAN
 alias cspan='rtmpdump -q -v -r "rtmp://cp82346.live.edgefcs.net:1935/live" -y CSPAN1@14845 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN/" | vlc -q --input-title-format "CSPAN" - &'
+## CSPAN2
 alias cspan2='rtmpdump -q -v -r "rtmp://cp82347.live.edgefcs.net:1935/live" -y CSPAN2@14846 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN2/" | vlc -q --input-title-format "CSPAN2" - &'
+## CSPAN3
 alias cspan3='rtmpdump -q -v -r "rtmp://cp82348.live.edgefcs.net:1935/live" -y CSPAN3@14847 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN3/" | vlc -q --input-title-format "CSPAN3" - &'
+## MSNBSHIT
 alias msnbc='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge" -y msnbc_live -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://www.rentadrone.tv/msnbc-live-rockinroosters/" | vlc -q --input-title-format "MSNBC" - &'
+## RT
 alias rt='rtmpdump -q -v -r "rtmp://rt.fms-04.visionip.tv/live/rt-global-live-HD" -a live -W "http://rt.com/s/swf/player5.4.viral.swf" | vlc -q --input-title-format "Russia Today" - &'
+## Headline News Network
 alias hln='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge" -y "hln_live" -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://www.rentadrone.tv/msnbc-live-rockinroosters/" | vlc -q --input-title-format "HLN" - &'
+## Youtube Viewer
 alias yt='youtube-viewer  --prefer-https --prefer-webm --use-colors --quiet --7 -S -C -q --mplayer="/usr/bin/vlc" --mplayer-args="-q"'
 ## useful stuffs
 # Show history
