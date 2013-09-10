@@ -330,10 +330,10 @@ alias most='du -hsx * | sort -rh | head -10'
 
 ## usage: pxclip 
 ## result: pastes code from clipboard and fills clipboard with URL of paste
-alias pxclip='tsocks wgetpaste --service gists --language Shell  --xcut --xclippaste'
+alias pxclip='torsocks wgetpaste --service gists --language Shell  --xcut --xclippaste'
 ## usage: cat <file> | pfile
 ## e.g.: cat ~/.zshrc | pfile
-alias pfile='tsocks wgetpaste --service gists --language Shell --xclippaste'
+alias pfile='torsocks wgetpaste --service gists --language Shell --xclippaste'
 alias google='goo'
 alias googleimages='gi'
 alias startpage='sp'
@@ -342,8 +342,8 @@ alias _='sudo'
 alias c='clear'
 alias f='file'
 alias ls='ls --color=auto'
-alias ping='tsocks ping -c 5'
-alias pong='tsocks ping -c 5'
+alias ping='torsocks ping -c 5'
+alias pong='torsocks ping -c 5'
 ## safety features
 alias cp='cp -i'
 alias mv='mv -i'
