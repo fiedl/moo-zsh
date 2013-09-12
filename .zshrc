@@ -111,11 +111,15 @@ key[PageDown]=${terminfo[knp]}
 ## active. Only then are the values from $terminfo valid.
 
 function zle-line-init () {
-    echoti smkx
+    if (( ${+terminfo[smkx]} )); then
+        echoti smkx
+    fi
 }
 
 function zle-line-finish () {
-    echoti rmkx
+    if (( ${+terminfo[rmkx]} )); then
+        echoti rmkx
+    fi
 }
 
 zle -N zle-line-init
@@ -388,6 +392,7 @@ alias ..='cd ..'
 alias ssh='export TERM=xterm-color && ssh'
 alias sshtor='export TERM=xterm-color ; torsocks ssh'
 alias resolve='tor-resolve'
+alias dbu='usewithtor dropbox_uploader'
 # misc
 alias grep='grep --color=auto'
 alias delthumbs='rm -rv ~/.thumbnails/ && rm ~/.kde4/cache-$HOST/icon-cache.kcache'
