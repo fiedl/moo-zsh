@@ -393,6 +393,8 @@ alias ssh='export TERM=xterm-color && ssh'
 alias sshtor='export TERM=xterm-color ; torsocks ssh'
 alias resolve='tor-resolve'
 alias dbu='usewithtor dropbox_uploader'
+alias wgettor='usewithtor wget'
+alias curltor='usewithtor curl'
 # misc
 alias grep='grep --color=auto'
 alias delthumbs='rm -rv ~/.thumbnails/ && rm ~/.kde4/cache-$HOST/icon-cache.kcache'
