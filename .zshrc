@@ -68,6 +68,7 @@ setopt completealiases
 setopt completeinword
 setopt autocd
 setopt interactivecomments # pound sign in interactive prompt
+setopt share_history
 
 autoload -Uz compinit
 compinit
