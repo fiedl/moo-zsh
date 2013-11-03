@@ -174,7 +174,7 @@ prompt_gtmanfred_setup() {
 
     PROMPT='┌─ %B%F{blue}%n%f%b %F{red}at%f %B%F{blue}%m%f%b %F{red}in%f %B%F{blue}%~%f%b ${vcs_info_msg_0_}%{$reset_color%}$prompt_newline$(prompt_char)%f'
 
-    RPROMPT="%(?,%F{blue}(⌐■_■),%F{red}%? %F{red}（╯°□°）╯︵ ┻━┻)%f"
+    RPROMPT="%(?,%F{blue}(⌐■_■),%F{red}%? %F{red}(ﾉ °益°)ﾉ 彡 ┻━┻)%f"
     PS4='+%N:%i:%x:%I>'
 }
 
