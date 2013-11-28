@@ -241,7 +241,7 @@ human_filesize() {
 ## usage: goo "pizza hut"
 goo() { 
   gg="https://www.google.com/search?q="
-  ff="firefox"
+  ff="iceweasel"
   if [ $1 ]; then
     "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})
   else
@@ -252,7 +252,7 @@ goo() {
 ## usage: gi "cats"
 gi() { 
   gg="https://www.google.com/search?q="
-  ff="firefox"
+  ff="iceweasel"
   if [ $1 ]; then
     "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})"&tbm=isch"
   else
@@ -264,7 +264,7 @@ gi() {
 ## e.g.: remind 10m "omg, the pizza"
 sp() { 
   gg="https://startpage.com/do/search?q="
-  ff="firefox"
+  ff="iceweasel"
   term="$1"
   if [ $1 ]; then
     "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})
@@ -274,7 +274,7 @@ sp() {
 }
 
 ## usage: logjack <application>
-## e.g.: logjack firefox
+## e.g.: logjack iceweasel
 logjack() {
    APP="$(pidof $1)"
    strace -ff -e trace=write -e write=1,2 -p $APP
@@ -471,7 +471,7 @@ alias rload='reload'
 #alias steam='export STEAM_RUNTIME=0 && export SDL_AUDIODRIVER=alsa && steam'
 ## suffix aliases
 alias -s php=subl3
-alias -s html=firefox
+alias -s html=iceweasel
 alias -s png=feh
 alias -s jpg=feh
 alias -s gif=feh
