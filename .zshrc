@@ -351,7 +351,7 @@ alias ls='ls --color=auto'
 alias ping='torsocks ping -c 5'
 alias pong='torsocks ping -c 5'
 ## safety features
-alias cp='cp -i'
+alias cp='cp'
 alias mv='mv -i'
 alias rm='rm -I'    # 'rm -i' prompts for every file
 alias ln='ln -i'
