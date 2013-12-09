@@ -329,12 +329,12 @@ disable() {
 }
 
 pac() { 
-    sudo pacman -S "$@"
+    pacaur -S "$@"
     schroot -p -- sudo pacman -S "$@"
 }
 
 pacrs() { 
-    sudo pacman -Rs "$@"
+    pacaur -Rs "$@"
     schroot -p -- sudo pacman -Rs "$@"
 }
 
