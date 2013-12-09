@@ -330,11 +330,11 @@ disable() {
 
 pac() { 
     pacaur -S "$@"
-    schroot -p -- sudo pacman -S "$@"
+    schroot -p -- pacaur -S "$@"
 }
 
 pacrs() { 
-    pacaur -Rs "$@"
+    sudo pacman -Rs "$@"
     schroot -p -- sudo pacman -Rs "$@"
 }
 
