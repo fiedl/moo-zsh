@@ -283,7 +283,7 @@ logjack() {
 
 ## usage: cdl <directory> 
 ## result: it will automatically execute the command 'ls -al' after cd
-cdl()    {
+cdl() {
    cd "$@";
    ls -al;
 }
@@ -326,6 +326,16 @@ enable() {
 disable() { 
     sudo systemctl disable $1.service
     listd
+}
+
+pac() { 
+    sudo pacman -S "$@"
+    schroot -p -- sudo pacman -S "$@"
+}
+
+pacrs() { 
+    sudo pacman -Rs "$@"
+    schroot -p -- sudo pacman -Rs "$@"
 }
 
 ## Grabs the disk usage in the current directory
