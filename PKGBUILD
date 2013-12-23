@@ -37,7 +37,7 @@ package() {
     cp -r "$srcdir/$pkgname/" "${pkgdir}/usr/share/"
 	msg2 "Installing mooOS zsh configs${pkgver}."
     mkdir -p "${pkgdir}/usr/share/$pkgname/zsh/git-prompt"
-    cp -r "$srcdir/$pkgname/.zsh/git-prompt" "${pkgdir}/usr/share/$pkgname/zsh/git-prompt/"
+    cp -r "$srcdir/$pkgname/.zsh/git-prompt" "${pkgdir}/usr/share/$pkgname/zsh/"
 	install -D -m 644 ".zprofile" "$pkgdir/usr/share/$pkgname/zprofile"
 	install -D -m 644 ".zshrc" "$pkgdir/usr/share/$pkgname/zshrc"
 }
