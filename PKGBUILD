@@ -1,6 +1,6 @@
 # Maintainer: pdq <pdq@localhost>
 pkgname=moo-zsh
-pkgver=0.10
+pkgver=0.1
 pkgrel=1
 pkgdesc="mooOS zsh configuration"
 arch=(any)
