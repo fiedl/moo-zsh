@@ -449,6 +449,7 @@ alias 2mp3='mplayer -ao pcm -vo null -vc dummy -dumpaudio -dumpfile'
 #alias 000='chmod 000'
 #alias 644='chmod 644'
 #alias 755='chmod 755'
+alias driversinuse="lspci -nnk | grep -i vga -A3"
 ## pacman
 alias p="sudo pacman -S"         # install one or more packages
 alias pp="pacman -Ss"            # search for a package using one or more keywords
