@@ -358,6 +358,7 @@ alias _='sudo'
 alias c='clear'
 alias f='file'
 alias ls='ls --color=auto'
+alias l='ls -l --color=auto'
 alias ping='torsocks ping -c 5'
 alias pong='torsocks ping -c 5'
 ## safety features
@@ -450,6 +451,8 @@ alias 2mp3='mplayer -ao pcm -vo null -vc dummy -dumpaudio -dumpfile'
 #alias 644='chmod 644'
 #alias 755='chmod 755'
 alias driversinuse="lspci -nnk | grep -i vga -A3"
+alias sip='sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n'
+
 ## pacman
 alias p="sudo pacman -S"         # install one or more packages
 alias pp="pacman -Ss"            # search for a package using one or more keywords
