@@ -242,7 +242,7 @@ human_filesize() {
 ## usage: goo "pizza hut"
 goo() { 
   gg="https://www.google.com/search?q="
-  ff="iceweasel"
+  ff="$BROWSER"
   if [ $1 ]; then
     "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})
   else
@@ -253,7 +253,7 @@ goo() {
 ## usage: gi "cats"
 gi() { 
   gg="https://www.google.com/search?q="
-  ff="iceweasel"
+  ff="$BROWSER"
   if [ $1 ]; then
     "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})"&tbm=isch"
   else
@@ -265,7 +265,7 @@ gi() {
 ## e.g.: remind 10m "omg, the pizza"
 sp() { 
   gg="https://startpage.com/do/search?q="
-  ff="iceweasel"
+  ff="$BROWSER"
   term="$1"
   if [ $1 ]; then
     "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})
@@ -486,7 +486,7 @@ alias rload='reload'
 #alias steam='export STEAM_RUNTIME=0 && export SDL_AUDIODRIVER=alsa && steam'
 ## suffix aliases
 alias -s php=subl3
-alias -s html=iceweasel
+alias -s html=$BROWSER
 alias -s png=feh
 alias -s jpg=feh
 alias -s gif=feh

@@ -1,13 +1,14 @@
 # Maintainer: pdq <pdq@localhost>
 pkgname=moo-zsh
 pkgver=0.1
-pkgrel=1
+pkgrel=3
 pkgdesc="mooOS zsh configuration"
 arch=(any)
 url="https://github.com/idk/zsh.git"
 license=('GPL3')
 makedepends=('git')
 depends=('zsh' 'zsh-syntax-highlighting' 'zsh-completions')
+groups=moo
 #conflicts=('abc' 'xyz')
 #source=("")
 #md5sums=('SKIP')
