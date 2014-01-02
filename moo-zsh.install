@@ -1,7 +1,7 @@
 post_install() {
     echo "$ cp /usr/share/moo-zsh/zshrc ~/.zshrc"
     echo "$ cp /usr/share/moo-zsh/zprofile ~/.zprofile"
-    echo "$ cp /usr/share/moo-zsh/zsh ~/.zsh"
+    echo "$ cp -r /usr/share/moo-zsh/zsh ~/.zsh"
 }
 
 post_upgrade() {
