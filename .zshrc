@@ -294,38 +294,39 @@ mcd () {
 }
 
 ## Services shortcuts and commonlyh used functions
-listd() { 
+_listd() { 
     [[ -d /etc/systemd/system/multi-user.target.wants ]] && ls -l /etc/systemd/system/multi-user.target.wants
     [[ -d /etc/systemd/system/default.target.wants ]] && ls -l /etc/systemd/system/default.target.wants
     [[ -d /etc/systemd/system/remote-fs.target.wants ]] && ls -l /etc/systemd/system/remote-fs.target.wants
 }
 
-start() { 
+_start() { 
     sudo systemctl start $1.service
     sudo systemctl status $1.service
 }
 
-restart() { 
+_restart() { 
     sudo systemctl restart $1.service
     sudo systemctl status $1.service
 }
 
-stop() { 
+_stop() { 
     sudo systemctl stop $1.service
     sudo systemctl status $1.service
 }
 
-status() { 
+_status() { 
     sudo systemctl status $1.service
 }
 
-enable() { 
-    sudo systemctl enable $1.service ; listd
+_enable() { 
+    sudo systemctl enable $1.service
+    _listd
 }
 
-disable() { 
+_disable() { 
     sudo systemctl disable $1.service
-    listd
+    _listd
 }
 
 pac() { 
@@ -499,7 +500,7 @@ alias -s java=$EDITOR
 alias -s txt=$EDITOR
 alias -s PKGBUILD=$EDITOR
 hash -d github=$HOME/github
-hash -d units=/usr/lib/systemd/system/
+#hash -d units=/usr/lib/systemd/system/
 ## global aliases
 alias -g ...='../..'
 alias -g C='| wc -l'
