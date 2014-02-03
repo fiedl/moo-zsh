@@ -15,7 +15,7 @@ export NMON=rkj
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local}
 export MOZ_DISABLE_PANGO=1
-export LD_LIBRARY_PATH="/opt/desura/lib:$LD_LIBRARY_PATH"
+#export LD_LIBRARY_PATH="/opt/desura/lib:$LD_LIBRARY_PATH"
 
 ## if !/bin exists, add ~/bin to PATH
 if [ -d ~/bin ] ; then
