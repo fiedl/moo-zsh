@@ -13,16 +13,23 @@ if [ ! -f $XDG_CACHE_HOME ]; then
     mkdir -p -m 0700 $XDG_CACHE_HOME
 fi
 
+## start clipboard manager
+if [ -f /usr/bin/autocutsel ]; then
+    killall -q autocutsel
+    autocutsel -fork &
+    autocutsel -selection PRIMARY -fork &
+fi
+
 # welcome audio message
 #ogg123 -q "${HOME}/.config/awesome/sounds/voice-welcome.ogg"
-cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
+#cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
 #ogg123 -q "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
 
 # ssh-agent
-if [ -f "${HOME}/.ssh/id_rsa" ] ; then
-	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+#if [ -f "${HOME}/.ssh/id_rsa" ] ; then
+#	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 	#ogg123 -q "${HOME}/.config/awesome/sounds/voice-piy.ogg"
-fi
+#fi
 
 # mounted success files
 #tc1="/media/truecrypt3/test"
@@ -44,6 +51,7 @@ fi
  # 	fi
  # fi
 
-cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
+#cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
 [[ -f ~/.zshrc ]] && . ~/.zshrc
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
+#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
+#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && sudo systemctl start lightdm
