@@ -20,16 +20,20 @@ if [ -f /usr/bin/autocutsel ]; then
     autocutsel -selection PRIMARY -fork &
 fi
 
+[ -z "$(pidof urxvtd)" ] && [ -f /usr/bin/urxvtd ] && urxvtd -q -o -f
+
 # welcome audio message
 #ogg123 -q "${HOME}/.config/awesome/sounds/voice-welcome.ogg"
 #cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
 #ogg123 -q "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
 
 # ssh-agent
-#if [ -f "${HOME}/.ssh/id_rsa" ] ; then
-#	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+if [ -f "${HOME}/.ssh/id_rsa" ] ; then
+	[ -z "$(pidof keychain)" ] && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 	#ogg123 -q "${HOME}/.config/awesome/sounds/voice-piy.ogg"
-#fi
+fi
+
+[ -z "$(pidof gpg-agent)" ] && eval $(gpg-agent --daemon) &
 
 # mounted success files
 #tc1="/media/truecrypt3/test"
