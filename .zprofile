@@ -14,11 +14,11 @@ if [ ! -f $XDG_CACHE_HOME ]; then
 fi
 
 ## start clipboard manager
-if [ -f /usr/bin/autocutsel ]; then
-    killall -q autocutsel
-    autocutsel -fork &
-    autocutsel -selection PRIMARY -fork &
-fi
+# if [ -f /usr/bin/autocutsel ] ; then
+#     killall -q autocutsel
+#     autocutsel -fork &
+#     autocutsel -selection PRIMARY -fork &
+# fi
 
 [ -z "$(pidof urxvtd)" ] && [ -f /usr/bin/urxvtd ] && urxvtd -q -o -f
 
@@ -28,12 +28,12 @@ fi
 #ogg123 -q "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
 
 # ssh-agent
-if [ -f "${HOME}/.ssh/id_rsa" ] ; then
-	[ -z "$(pidof keychain)" ] && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+#if [ -f "${HOME}/.ssh/id_rsa" ] ; then
+#	[ -z "$(pidof keychain)" ] && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 	#ogg123 -q "${HOME}/.config/awesome/sounds/voice-piy.ogg"
-fi
+#fi
 
-[ -z "$(pidof gpg-agent)" ] && eval $(gpg-agent --daemon) &
+#[ -z "$(pidof gpg-agent)" ] && eval $(gpg-agent --daemon) &
 
 # mounted success files
 #tc1="/media/truecrypt3/test"
@@ -58,4 +58,3 @@ fi
 #cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
 [[ -f ~/.zshrc ]] && . ~/.zshrc
 #[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
-#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && sudo systemctl start lightdm
