@@ -3,6 +3,7 @@
 #
 #LANG=en_US.UTF-8
 #export STEAM_FRAME_FORCE_CLOSE=1
+export MALLOC_CHECK_=1
 export EDITOR="nano"
 export PATH=$PATH:/usr/local/bin
 #export WEBKIT_IGNORE_SSL_ERRORS="1" midori
