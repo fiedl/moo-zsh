@@ -239,28 +239,6 @@ human_filesize() {
   awk -v sum="$1" ' BEGIN {hum[1024^3]="Gb"; hum[1024^2]="Mb"; hum[1024]="Kb"; for (x=1024^3; x>=1024; x/=1024) { if (sum>=x) { printf "%.2f %s\n",sum/x,hum[x]; break; } } if (sum<1024) print "1kb"; } '
 }
 
-## usage: goo "pizza hut"
-goo() { 
-  gg="https://www.google.com/search?q="
-  ff="$BROWSER"
-  if [ $1 ]; then
-    "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})
-  else
-    echo 'Usage: goo (google) "[seach term]"'
-  fi 
-}
-
-## usage: gi "cats"
-gi() { 
-  gg="https://www.google.com/search?q="
-  ff="$BROWSER"
-  if [ $1 ]; then
-    "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})"&tbm=isch"
-  else
-    echo 'Usage: gi (googleimages) "[seach term]"'
-  fi 
-}
-
 ## usage: remind <time> <text>
 ## e.g.: remind 10m "omg, the pizza"
 sp() { 
@@ -380,22 +358,14 @@ alias matrix='cmatrix -C magenta'
 ## TV streams
 ## Aljazeera
 alias ajz='rtmpdump -q -v -r "rtmp://aljazeeraflashlivefs.fplive.net/aljazeeraflashlive-live/aljazeera_eng_med" | vlc --input-title-format "Aljazeera" - &'
-##  CNN
-alias cnn='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge/cnn_live" -W "http://msnbclive.eu/player.swf" -p "http://blog.livenewschat.tv/situation-chatroom" | vlc -q --input-title-format "CNN Live" - &'
-## CNN International
-alias cnni='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge/cnni_live" -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://blog.livenewschat.tv/international-room-chat" | vlc -q --input-title-format "CNN International" - &'
 ## CSPAN
 alias cspan='rtmpdump -q -v -r "rtmp://cp82346.live.edgefcs.net:1935/live" -y CSPAN1@14845 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN/" | vlc -q --input-title-format "CSPAN" - &'
 ## CSPAN2
 alias cspan2='rtmpdump -q -v -r "rtmp://cp82347.live.edgefcs.net:1935/live" -y CSPAN2@14846 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN2/" | vlc -q --input-title-format "CSPAN2" - &'
 ## CSPAN3
 alias cspan3='rtmpdump -q -v -r "rtmp://cp82348.live.edgefcs.net:1935/live" -y CSPAN3@14847 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN3/" | vlc -q --input-title-format "CSPAN3" - &'
-## MSNBSHIT
-alias msnbc='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge" -y msnbc_live -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://www.rentadrone.tv/msnbc-live-rockinroosters/" | vlc -q --input-title-format "MSNBC" - &'
 ## RT
 alias rt='rtmpdump -q -v -r "rtmp://rt.fms-04.visionip.tv/live/rt-global-live-HD" -a live -W "http://rt.com/s/swf/player5.4.viral.swf" | vlc -q --input-title-format "Russia Today" - &'
-## Headline News Network
-alias hln='rtmpdump -q -v -r "rtmp://a.cdn.msnbclive.eu/edge" -y "hln_live" -W "http://msnbclive.eu/getswf.php?name=player.swf" -p "http://www.rentadrone.tv/msnbc-live-rockinroosters/" | vlc -q --input-title-format "HLN" - &'
 ## Youtube Viewer
 alias yt='youtube-viewer  --prefer-https --prefer-webm --use-colors --quiet --7 -S -C -q --mplayer="/usr/bin/vlc" --mplayer-args="-q"'
 ## useful stuffs
@@ -406,7 +376,7 @@ alias ..='cd ..'
 alias ssh='export TERM=xterm-color && ssh'
 alias sshtor='export TERM=xterm-color ; torsocks ssh'
 alias resolve='tor-resolve'
-alias dbu='usewithtor dropbox_uploader'
+#alias dbu='usewithtor dropbox_uploader'
 alias wgettor='usewithtor wget'
 alias curltor='usewithtor curl'
 # misc
