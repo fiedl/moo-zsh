@@ -317,6 +317,13 @@ pacrs() {
     schroot -p -- sudo pacman -Rs "$@"
 }
 
+cmdhr() {
+  cd ~/Desktop
+  history $1 > cmdhr.txt
+  cat cmdhr.txt
+  cd -
+}
+
 ## Grabs the disk usage in the current directory
 alias usage='du -ch 2> /dev/null | tail -1'
 
