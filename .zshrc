@@ -228,6 +228,17 @@ set -o notify
 ## information
 screenfetch -D "mooOS"
 
+## force decrypt shell history
+decrypt_hist() {
+    gpg ${HISTFILE}.gpg
+}
+
+## force encrypt shell history
+encrypt_hist() {
+    gpg -c $HISTFILE
+    rm $HISTFILE
+}
+
 ## usage: remind <time> <text>
 ## e.g.: remind 10m "omg, the pizza"
 remind() {
