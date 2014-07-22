@@ -24,17 +24,17 @@ fi
 [ -z "$(pidof urxvtd)" ] && [ -f /usr/bin/urxvtd ] && urxvtd -q -o -f
 
 # welcome audio message
-#ogg123 -q "${HOME}/.config/awesome/sounds/voice-welcome.ogg"
+mplayer "${HOME}/.config/awesome/sounds/voice-welcome.ogg"
 #cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
-#ogg123 -q "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
+mplayer "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
 
 # ssh-agent
-#if [ -f "${HOME}/.ssh/id_rsa" ] ; then
-#	[ -z "$(pidof keychain)" ] && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-	#ogg123 -q "${HOME}/.config/awesome/sounds/voice-piy.ogg"
-#fi
+if [ -f "${HOME}/.ssh/id_rsa" ] ; then
+	[ -z "$(pidof keychain)" ] && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+	mplayer "${HOME}/.config/awesome/sounds/voice-piy.ogg"
+fi
 
-#[ -z "$(pidof gpg-agent)" ] && eval $(gpg-agent --daemon) &
+[ -z "$(pidof gpg-agent)" ] && eval $(gpg-agent --daemon) &
 
 # mounted success files
 #tc1="/media/truecrypt3/test"
@@ -49,13 +49,13 @@ fi
 
  # 	if [ -f "$tc1" ] ; then
  # 		echo "mounted /media/truecrypt3"
- # 		#ogg123 -q "${HOME}/.config/awesome/sounds/voice-accepted.ogg"
+ # 		mplayer "${HOME}/.config/awesome/sounds/voice-accepted.ogg"
  # 	else
  # 		echo "Incorrect passphrase..."
- # 		#ogg123 -q "${HOME}/.config/awesome/sounds/voice-access-denied.ogg"
+ # 		mplayer "${HOME}/.config/awesome/sounds/voice-access-denied.ogg"
  # 	fi
  # fi
 
-#cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
+cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
 [[ -f ~/.zshrc ]] && . ~/.zshrc
-#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
