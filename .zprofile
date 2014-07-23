@@ -15,11 +15,11 @@ if [ ! -f $XDG_CACHE_HOME ]; then
 fi
 
 ## start clipboard manager
-# if [ -f /usr/bin/autocutsel ] ; then
-#     killall -q autocutsel
-#     autocutsel -fork &
-#     autocutsel -selection PRIMARY -fork &
-# fi
+if [ -f /usr/bin/autocutsel ] ; then
+    killall -q autocutsel
+    autocutsel -fork &
+    autocutsel -selection PRIMARY -fork &
+fi
 
 [ -z "$(pidof urxvtd)" ] && [ -f /usr/bin/urxvtd ] && urxvtd -q -o -f
 
