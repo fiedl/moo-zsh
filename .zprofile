@@ -24,14 +24,14 @@ fi
 [ -z "$(pidof urxvtd)" ] && [ -f /usr/bin/urxvtd ] && urxvtd -q -o -f
 
 # welcome audio message
-mplayer "${HOME}/.config/awesome/sounds/voice-welcome.ogg"
+#mplayer "${HOME}/.config/awesome/sounds/voice-welcome.ogg"
 #cowsay -f "$(ls /usr/share/cows/ | sort -R | head -1)" "$(fortune -s)"
-mplayer "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
+#mplayer "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
 
 # ssh-agent
 if [ -f "${HOME}/.ssh/id_rsa" ] ; then
 	[ -z "$(pidof keychain)" ] && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-	mplayer "${HOME}/.config/awesome/sounds/voice-piy.ogg"
+	#mplayer "${HOME}/.config/awesome/sounds/voice-piy.ogg"
 fi
 
 [ -z "$(pidof gpg-agent)" ] && eval $(gpg-agent --daemon) &
