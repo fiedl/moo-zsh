@@ -29,10 +29,10 @@ fi
 #mplayer "${HOME}/.config/awesome/sounds/voice-please-confirm.ogg"
 
 # ssh-agent
-if [ -f "${HOME}/.ssh/id_rsa" ] ; then
-	[ -z "$(pidof keychain)" ] && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+#if [ -f "${HOME}/.ssh/id_rsa" ] ; then
+#	[ -z "$(pidof keychain)" ] && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 	#mplayer "${HOME}/.config/awesome/sounds/voice-piy.ogg"
-fi
+#fi
 
 [ -z "$(pidof gpg-agent)" ] && eval $(gpg-agent --daemon) &
 
