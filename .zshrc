@@ -443,17 +443,17 @@ alias driversinuse="lspci -nnk | grep -i vga -A3"
 alias sip='sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n'
 
 ## pacman
-alias p="sudo pacman -S"         # install one or more packages
+alias p="sudo pacman -Syu"       # install one or more packages
 alias pp="pacman -Ss"            # search for a package using one or more keywords
 alias qs="pacman -Qs"            # search for installed package using one or more keywords
-alias syu="sudo pacmatic -Syu"     # upgrade all packages to their newest version
-alias rr="sudo pacman -R" # uninstall one or more packages
+alias syu="sudo pacman -Syu"     # upgrade all packages to their newest version
+alias rr="sudo pacman -R"        # uninstall one or more packages
 alias rs="sudo pacman -Rs"       # uninstall one or more packages and its dependencies 
 ## powerpill
-alias pillu="sudo powerpill -Syu"
-alias pill="sudo powerpill -S"
-alias a="pacaur -S"               # search packages
-alias aa="pacaur -s"              # install package
+#alias pillu="sudo powerpill -Syu"
+#alias pill="sudo powerpill -S"
+alias a="pacaur -Syu"             # install packages
+alias aa="pacaur -s"              # search package
 alias syua="pacaur -Syua"         # update aur packages
 alias syud="pacaur -Syua --devel" # update devel packages
 #alias pac="sudo pacman -Syu && pacaur -Syua"
@@ -461,9 +461,10 @@ alias cow="cower -u -v"
 #alias update='sudo powerpill -Syu && cower -u -v'
 alias plocal='pacman -Qqm | grep -vx "$(cat $HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/local.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/local.lst)'
 alias pmain='pacman -Qqe | grep -vx "$(pacman -Qqg base)" | grep -vx "$(pacman -Qqm)" | grep -vx "$(<$HOME/bin/backup_exclude_pkgs)" > $HOME/github/pdq/main.lst && echo $(tr -s "\n" " " < $HOME/github/pdq/main.lst)'
-alias z="schroot -p -- pacaur -S"               # chroot search packages
-alias x="schroot -p -- sudo pacman -SS"         # chroot search packages
-alias zzz="schroot -p --"               # chroot
+alias z="schroot -p -- pacaur -s"               # chroot search packages
+alias x="schroot -p -- sudo pacman -Ss"         # chroot search packages
+alias zrs="schroot -p -- sudo pacman -Rs"       # chroot search packages
+alias zzz="schroot -p --"                       # chroot
 ## git hub
 alias git=hub
 alias commit="git commit -m"
