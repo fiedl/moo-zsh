@@ -16,8 +16,8 @@ sha512sums=('SKIP')
 install=$pkgname.install
 
 package() {
-    install -d "${pkgdir}/usr/share/$pkgname"
-    cp -r "$srcdir/$pkgname/.zsh/git-prompt" "${pkgdir}/usr/share/$pkgname/zsh/"
-	install -Dm 644 "$srcdir/$pkgname/.zprofile" "$pkgdir/usr/share/$pkgname/zprofile"
-	install -Dm 644 "$srcdir/$pkgname/.zshrc" "$pkgdir/usr/share/$pkgname/zshrc"
+	install -d "${pkgdir}/usr/share/$pkgname"
+    cp -r "$srcdir/zsh/.zsh/git-prompt" "${pkgdir}/usr/share/$pkgname/zsh/"
+	install -Dm 644 "$srcdir/zsh/.zprofile" "$pkgdir/usr/share/$pkgname/zprofile"
+	install -Dm 644 "$srcdir/zsh/.zshrc" "$pkgdir/usr/share/$pkgname/zshrc"
 }
