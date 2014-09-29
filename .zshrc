@@ -356,7 +356,7 @@ alias c='clear'
 alias f='file'
 alias ls='ls --color=auto'
 alias l='ls -l --color=auto'
-alias ping='torsocks ping -c 5'
+alias ping='ping -c 5'
 alias pong='torsocks ping -c 5'
 ## safety features
 alias cp='cp'
