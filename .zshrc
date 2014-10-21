@@ -466,6 +466,8 @@ alias z="schroot -p -- pacaur -Syu"               # chroot search packages
 alias x="schroot -p -- sudo pacman -Ss"         # chroot search packages
 alias zrs="schroot -p -- sudo pacman -Rs"       # chroot search packages
 alias zzz="schroot -p --"                       # chroot
+alias zqs="schroot -p -- pacman -Qs"       # search for installed package using one or more keywords
+
 ## git hub
 alias git=hub
 alias commit="git commit -m"
