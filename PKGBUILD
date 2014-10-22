@@ -1,7 +1,7 @@
 # Maintainer: pdq <pdq@localhost>
 pkgname=moo-zsh
 pkgver=0.2
-pkgrel=9
+pkgrel=10
 pkgdesc="mooOS zsh configuration"
 arch=(any)
 url="https://github.com/idk/zsh.git"

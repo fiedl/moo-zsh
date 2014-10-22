@@ -373,17 +373,6 @@ alias .p="pushd ."
 alias p.="popd"
 ## fun stuffs
 alias matrix='cmatrix -C magenta'
-## TV streams
-## Aljazeera
-alias ajz='rtmpdump -q -v -r "rtmp://aljazeeraflashlivefs.fplive.net/aljazeeraflashlive-live/aljazeera_eng_med" | vlc --input-title-format "Aljazeera" - &'
-## CSPAN
-alias cspan='rtmpdump -q -v -r "rtmp://cp82346.live.edgefcs.net:1935/live" -y CSPAN1@14845 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN/" | vlc -q --input-title-format "CSPAN" - &'
-## CSPAN2
-alias cspan2='rtmpdump -q -v -r "rtmp://cp82347.live.edgefcs.net:1935/live" -y CSPAN2@14846 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN2/" | vlc -q --input-title-format "CSPAN2" - &'
-## CSPAN3
-alias cspan3='rtmpdump -q -v -r "rtmp://cp82348.live.edgefcs.net:1935/live" -y CSPAN3@14847 -W "http://www.c-span.org/cspanVideoHD.swf" -p "http://www.c-span.org/Live-Video/C-SPAN3/" | vlc -q --input-title-format "CSPAN3" - &'
-## RT
-alias rt='rtmpdump -q -v -r "rtmp://rt.fms-04.visionip.tv/live/rt-global-live-HD" -a live -W "http://rt.com/s/swf/player5.4.viral.swf" | vlc -q --input-title-format "Russia Today" - &'
 ## Youtube Viewer
 alias yt='youtube-viewer  --prefer-https --prefer-webm --use-colors --quiet --7 -S -C -q --mplayer="/usr/bin/vlc" --mplayer-args="-q"'
 ## useful stuffs
