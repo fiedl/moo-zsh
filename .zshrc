@@ -187,19 +187,19 @@ prompt_gtmanfred_setup "$@"
 ## Window title
 case $TERM in
     termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
-		precmd () { print -Pn "\e]0;[%n@%M][%~]%#\a" } 
+		precmd () { print -Pn "\e]0;[%n@%M][%~]%#\a" }
 		preexec () { print -Pn "\e]0;[%n@%M][%~]%# ($1)\a" }
 	;;
     screen)
-    	precmd () { 
-			print -Pn "\e]83;title \"$1\"\a" 
-			print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" 
+    	precmd () {
+			print -Pn "\e]83;title \"$1\"\a"
+			print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a"
 		}
-		preexec () { 
-			print -Pn "\e]83;title \"$1\"\a" 
-			print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" 
+		preexec () {
+			print -Pn "\e]83;title \"$1\"\a"
+			print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a"
 		}
-	;; 
+	;;
 esac
 
 ## hub tab-completion script for zsh.
@@ -223,7 +223,7 @@ if declare -f _git_commands > /dev/null; then
   eval "$(declare -f _git_commands | sed -e 's/base_commands=(/base_commands=(${_hub_commands} /')"
 fi
 
-set -o notify 
+set -o notify
 
 ## information
 screenfetch -D "mooOS"
@@ -246,13 +246,13 @@ remind() {
 }
 
 ## usage: human_filesize <size in bytes>
-human_filesize() { 
+human_filesize() {
   awk -v sum="$1" ' BEGIN {hum[1024^3]="Gb"; hum[1024^2]="Mb"; hum[1024]="Kb"; for (x=1024^3; x>=1024; x/=1024) { if (sum>=x) { printf "%.2f %s\n",sum/x,hum[x]; break; } } if (sum<1024) print "1kb"; } '
 }
 
 ## usage: remind <time> <text>
 ## e.g.: remind 10m "omg, the pizza"
-sp() { 
+sp() {
   gg="https://startpage.com/do/search?q="
   ff="$BROWSER"
   term="$1"
@@ -260,7 +260,7 @@ sp() {
     "$ff" -new-tab "$gg"$(echo ${1//[^a-zA-Z0-9]/+})
   else
     echo 'Usage: sp (startpage) "[seach term]"'
-  fi 
+  fi
 }
 
 ## usage: logjack <application>
@@ -270,7 +270,7 @@ logjack() {
    strace -ff -e trace=write -e write=1,2 -p $APP
 }
 
-## usage: cdl <directory> 
+## usage: cdl <directory>
 ## result: it will automatically execute the command 'ls -al' after cd
 cdl() {
    cd "$@";
@@ -283,47 +283,47 @@ mcd () {
 }
 
 ## Services shortcuts and commonlyh used functions
-_listd() { 
+_listd() {
     [[ -d /etc/systemd/system/multi-user.target.wants ]] && ls -l /etc/systemd/system/multi-user.target.wants
     [[ -d /etc/systemd/system/default.target.wants ]] && ls -l /etc/systemd/system/default.target.wants
     [[ -d /etc/systemd/system/remote-fs.target.wants ]] && ls -l /etc/systemd/system/remote-fs.target.wants
 }
 
-_start() { 
+_start() {
     sudo systemctl start $1.service
     sudo systemctl status $1.service
 }
 
-_restart() { 
+_restart() {
     sudo systemctl restart $1.service
     sudo systemctl status $1.service
 }
 
-_stop() { 
+_stop() {
     sudo systemctl stop $1.service
     sudo systemctl status $1.service
 }
 
-_status() { 
+_status() {
     sudo systemctl status $1.service
 }
 
-_enable() { 
+_enable() {
     sudo systemctl enable $1.service
     _listd
 }
 
-_disable() { 
+_disable() {
     sudo systemctl disable $1.service
     _listd
 }
 
-pac() { 
+pac() {
     pacaur -S "$@"
     schroot -p -- pacaur -S "$@"
 }
 
-pacrs() { 
+pacrs() {
     sudo pacman -Rs "$@"
     schroot -p -- sudo pacman -Rs "$@"
 }
@@ -341,7 +341,7 @@ alias usage='du -ch 2> /dev/null | tail -1'
 ## Gives you what is using the most space, both directories and files
 alias most='du -hsx * | sort -rh | head -10'
 
-## usage: pxclip 
+## usage: pxclip
 ## result: pastes code from clipboard and fills clipboard with URL of paste
 alias pxclip='torsocks wgetpaste --service gists --language Shell  --xcut --xclippaste'
 ## usage: cat <file> | pfile
@@ -374,7 +374,7 @@ alias p.="popd"
 ## fun stuffs
 alias matrix='cmatrix -C magenta'
 ## Youtube Viewer
-alias yt='youtube-viewer  --prefer-https --prefer-webm --use-colors --quiet --7 -S -C -q --mplayer="/usr/bin/vlc" --mplayer-args="-q"'
+alias yt='youtube-dl'
 ## useful stuffs
 # Show history
 alias history='fc -l 1'
@@ -390,7 +390,7 @@ alias curltor='usewithtor curl'
 alias grep='grep --color=auto'
 alias delthumbs='rm -rv ~/.thumbnails/ && rm ~/.kde4/cache-$HOST/icon-cache.kcache'
 alias reload='source ~/.zshrc'
-alias xreload='xrdb ~/.Xdefaults' 
+alias xreload='xrdb ~/.Xdefaults'
 alias delfonts='fc-cache -vf'
 alias cclean='sudo pkgcacheclean -v'
 alias exitclean='disown -a && exit'
@@ -408,7 +408,7 @@ alias cpr="rsync --progress -ravz"
 alias tag="tmsu tag"
 alias untag="tmsu untag"
 alias tags="tmsu tags"
-alias mtag="tmsu tag --tags" 
+alias mtag="tmsu tag --tags"
 # control hardware
 #alias cdo='eject /dev/cdrecorder'
 #alias cdc='eject -t /dev/cdrecorder'
@@ -424,7 +424,7 @@ alias 2png='convert label:@- cmd.png'
 ## usage: 2mp3 <output-file> <input-file>
 alias 2mp3='mplayer -ao pcm -vo null -vc dummy -dumpaudio -dumpfile'
 ## chmod commands
-#alias mx='chmod a+x' 
+#alias mx='chmod a+x'
 #alias 000='chmod 000'
 #alias 644='chmod 644'
 #alias 755='chmod 755'
@@ -437,7 +437,7 @@ alias pp="pacman -Ss"            # search for a package using one or more keywor
 alias qs="pacman -Qs"            # search for installed package using one or more keywords
 alias syu="sudo pacman -Syu"     # upgrade all packages to their newest version
 alias rr="sudo pacman -R"        # uninstall one or more packages
-alias rs="sudo pacman -Rs"       # uninstall one or more packages and its dependencies 
+alias rs="sudo pacman -Rs"       # uninstall one or more packages and its dependencies
 ## powerpill
 #alias pillu="sudo powerpill -Syu"
 #alias pill="sudo powerpill -S"
