@@ -1,6 +1,7 @@
 #
 # ~/.zprofile
 #
+CHROOT=/media/Storage/mooOS/chroot 
 #LANG=en_US.UTF-8
 #export STEAM_FRAME_FORCE_CLOSE=1
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
