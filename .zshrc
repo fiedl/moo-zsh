@@ -375,6 +375,7 @@ alias p.="popd"
 alias matrix='cmatrix -C magenta'
 ## Youtube Viewer
 alias yt='youtube-dl'
+alias ytn='youtube-dl --ignore-config --no-mtime --prefer-free-formats -c'
 ## useful stuffs
 # Show history
 alias history='fc -l 1'
