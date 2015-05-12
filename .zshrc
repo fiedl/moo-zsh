@@ -397,7 +397,7 @@ alias cclean='sudo pkgcacheclean -v'
 alias exitclean='disown -a && exit'
 alias sy='systemctl'
 alias md5='md5sum'
-alias killdoll="sudo killall -9 knotify4;sudo killall -9 kuiserver;sudo killall -9 kglobalaccel;sudo killall -9 kded4;sudo killall -9 kdeinit4:;sudo killall -9 kactivitymanagerd;sudo killall -9 kio_http_cache_; sudo killall -9 kactivitymanagerd; sudo killall -9 kdeinit4; sudo killall -9 kded4; sudo killall -9 knotify4; sudo killall -9 kuiserver; sudo killall -9 kglobalaccel; sudo killall -9 klauncher; sudo killall -9 dolphin; echo 'all kde stuffs killed...'"
+alias killdoll="sudo killall -9 kglobalaccel5;sudo killall -9 knotify4;sudo killall -9 kuiserver;sudo killall -9 kglobalaccel;sudo killall -9 kded4;sudo killall -9 kdeinit4:;sudo killall -9 kactivitymanagerd;sudo killall -9 kio_http_cache_; sudo killall -9 kactivitymanagerd; sudo killall -9 kdeinit4; sudo killall -9 kded4; sudo killall -9 knotify4; sudo killall -9 kuiserver; sudo killall -9 kglobalaccel; sudo killall -9 klauncher; sudo killall -9 dolphin; echo 'all kde stuffs killed...'"
 ## usage: checkvid <video file>
 alias checkvid='mplayer -vo null -ao null -identify -frames 0'
 ## usage: 2thumb <image file>
